@@ -31,28 +31,36 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Settings</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Help</a>
-                </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
 </header>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link navLinkOverview" href="\Fairboard">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navLinkAccount" href="?controller=account&action=index">Accounts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navLinkRole" href="?controller=role&action=index">Roles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navLinkStock" href="#">Voorraad</a>
+                </li>
+            </ul>
+        </nav>
 
-<?php require_once('routes.php'); ?>
+        <?php require_once('routes.php'); ?>
+
+    </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
         integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
@@ -60,6 +68,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
-<script src="js/fairsoft.js"></script>
+<script src="js/general.js"></script>
 </body>
 </html>

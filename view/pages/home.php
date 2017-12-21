@@ -23,6 +23,9 @@
             <span class="text-muted">Something else</span>
         </div>
     </section>
-
-    <a href='?controller=account&action=index'>Account</a>
 </main>
+<script>
+    $( document ).ready(function() {
+        $('.navLinkOverview').addClass('active');
+    });
+</script>

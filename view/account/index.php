@@ -12,6 +12,9 @@
                     <tr>
                         <th><button id="accountBtnAdd" data-placement="top" data-toggle="tooltip" title="Add" class="btn btn-success btn-xs"><span class="fa fa-plus"></span></button></th>
                         <th>Gebruikersnaam</th>
+                        <th>Actief</th>
+                        <th> </th>
+                        <th> </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -19,7 +22,8 @@
                             <tr class="table-row">
                                 <td></td>
                                 <td class="username"><?php echo $account->getUsername();?></td>
-                                <td><button data-placement="top" data-toggle="tooltip" title="Delete" class="accountBtnDelete btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> </td>
+                                <td class="suspended"><?php echo $account->getSuspended();?></td>
+                                <td><button data-placement="top" data-toggle="tooltip" title="Suspend" class="accountBtnSuspend btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> </td>
                                 <td><button data-placement="top" data-toggle="tooltip" title="Save" class="accountBtnSave btn btn-primary btn-xs disabled"><span class="fa fa-floppy-o"></span></button></td>
                             </tr>
                         <script>

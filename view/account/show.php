@@ -1,1 +1,1 @@
-<p>Account is verwijderd</p>
+<?php echo $username;

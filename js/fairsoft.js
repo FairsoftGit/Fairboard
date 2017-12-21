@@ -1,9 +1,9 @@
 $( document ).ready(function() {
 
 
-    $('#accountTable').on('click', ".accountBtnDelete", function(){
+    $('#accountTable').on('click', ".accountBtnSuspend", function(){
         var row = $(this).closest('tr');
-        deleteAccount(row);
+        suspendAccount(row);
     });
 
     $('#accountTable').on('click', "#accountBtnAdd", function(){
@@ -87,16 +87,17 @@ function addAccount(){
     $("#accountTable").prepend(newRow);
 }
 
-function deleteAccount(row){
+function suspendAccount(row){
     var username = row.find(".username").html();
-    $.post("?controller=account&action=delete",
+    $.post("?controller=account&action=suspend",
         {
             username: username
         },
         function(){
-            row.fadeOut( function() {
-            row.remove();
-        });
+
+           // row.fadeOut( function() {
+           // row.remove();
+        //});
     });
 }
 

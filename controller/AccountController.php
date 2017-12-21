@@ -7,11 +7,11 @@ class AccountController
         require_once('view/account/index.php');
     }
 
-    public function delete() {
+    public function suspend() {
         if (!isset($_POST['username']))
             return call('pages', 'error');
 
-        Account::delete($_POST['username']);
+        Account::suspend($_POST['username']);
        // header('location: ?controller=account&action=index');
         exit();
     }

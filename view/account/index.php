@@ -11,18 +11,14 @@
                     <thead>
                     <tr>
                         <th><button id="accountBtnAdd" data-placement="top" data-toggle="tooltip" title="Add" class="btn btn-success btn-xs"><span class="fa fa-plus"></span></button></th>
-                        <th>Accountnummer</th>
                         <th>Gebruikersnaam</th>
-                        <th>Verwijderen</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php foreach($accounts as $account) { ?>
                             <tr class="table-row">
                                 <td></td>
-                                <td class="accountId"><?php echo $account->getAccountId(); ?></td>
                                 <td class="username"><?php echo $account->getUsername();?></td>
-                                <!--<td><a href="?controller=account&action=deleteAccount&accountId=<?php echo $account->getAccountId(); ?>" class="btn btn-xs btn-danger" role="button"><span class="fa fa-trash"></span></a> </td>-->
                                 <td><button data-placement="top" data-toggle="tooltip" title="Delete" class="accountBtnDelete btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> </td>
                                 <td><button data-placement="top" data-toggle="tooltip" title="Save" class="accountBtnSave btn btn-primary btn-xs disabled"><span class="fa fa-floppy-o"></span></button></td>
                             </tr>

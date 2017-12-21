@@ -1,11 +1,9 @@
 <?php
 class Account {
-    private $accountId;
     private $username;
     private $password;
 
-    public function __construct($accountId, $username, $password){
-        $this->accountId = $accountId;
+    public function __construct($username, $password){
         $this->username = $username;
         $this->password = $password;
     }
@@ -16,30 +14,26 @@ class Account {
         $req = $db->query('SELECT * FROM account');
 
         foreach($req->fetchAll() as $account) {
-            $list[] = new Account($account['accountId'], $account['username'], $account['password']);
+            $list[] = new Account($account['Username'], $account['Password']);
         }
         return $list;
     }
 
-    public static function find($accountId) {
+    public static function find($username) {
         $db = DBConnection::getInstance();
-        $accountId = intval($accountId);
-        $req = $db->prepare('SELECT * FROM account WHERE accountId = :accountId');
-        $req->execute(array('accountId' => $accountId));
+        $req = $db->prepare('SELECT * FROM account WHERE accountId = :username');
+        $req->execute(array('username' => $username));
         $account = $req->fetch();
-        return new Account($account['accountId'], $account['username'], $account['password']);
+        return new Account($account['username'], $account['password']);
     }
 
-    public static function delete($accountId) {
+    public static function delete($username) {
         $db = DBConnection::getInstance();
-        $accountId = intval($accountId);
-        $req = $db->prepare('DELETE FROM account WHERE accountId = :accountId');
-        $req->execute(array('accountId' => $accountId));
+        $username = intval($username);
+        $req = $db->prepare('DELETE FROM account WHERE $username = :username');
+        $req->execute(array('username' => $username));
     }
 
-    public function getAccountId(){
-        return $this->accountId;
-    }
     public function getUsername(){
         return $this->username;
     }

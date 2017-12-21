@@ -79,20 +79,19 @@ function addAccount(){
     var cols = "";
 
     var collEmpty = '<td></td>';
-    var collAccountId = '<td class="accountId">null</td>';
     var collUsername = '<td class="username" contenteditable="true" >test</td>';
     var collDeleteBtn = '<td><button data-placement="top" data-toggle="tooltip" title="Delete" class="accountBtnDelete btn btn-danger btn-xs"><span class="fa fa-trash"></span></button></td>';
     var collSaveBtn  = '<td><button data-placement="top" data-toggle="tooltip" title="Save" class="accountBtnSave btn btn-primary btn-xs"><span class="fa fa-floppy-o"></span></button></td>';
-    cols += collEmpty + collAccountId + collUsername + collDeleteBtn + collSaveBtn;
+    cols += collEmpty + collUsername + collDeleteBtn + collSaveBtn;
     newRow.append(cols);
     $("#accountTable").prepend(newRow);
 }
 
 function deleteAccount(row){
-    var accountId = row.find(".accountId").html();
-    $.post("?controller=account&action=deleteAccount",
+    var username = row.find(".username").html();
+    $.post("?controller=account&action=delete",
         {
-            accountId: accountId
+            username: username
         },
         function(){
             row.fadeOut( function() {
@@ -103,7 +102,7 @@ function deleteAccount(row){
 
 function saveAccount(row){
     var username = row.find(".username").html();
-    $.post("?controller=account&action=saveAccount",
+    $.post("?controller=account&action=save",
         {
             username: username
         },

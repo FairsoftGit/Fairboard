@@ -15,7 +15,7 @@ class Role
         $req = $db->query('SELECT * FROM role');
 
         foreach($req->fetchAll() as $role) {
-            $list[] = new Role($role['roleId'], $role['roleName']);
+            $list[] = new Role(null, $role['Role']);
         }
         return $list;
     }

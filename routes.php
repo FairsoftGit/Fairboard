@@ -7,9 +7,12 @@ function call($controller, $action) {
             $controller = new PagesController();
             break;
         case 'account':
-            // we need the model to query the database later in the controller
             require_once('model/Account.php');
             $controller = new AccountController();
+            break;
+        case 'role':
+            require_once('model/Role.php');
+            $controller = new RoleController();
             break;
     }
     $controller->{ $action }();
@@ -17,7 +20,8 @@ function call($controller, $action) {
 
 // we're adding an entry for the new controller and its actions
 $controllers = array('pages' => ['home', 'error'],
-                    'account' => ['index', 'show', 'suspend']);
+                    'account' => ['index', 'suspend'],
+                    'role' => ['index']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

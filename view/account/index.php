@@ -10,7 +10,8 @@
                 <table id="accountTable" class="table table-dark table-striped table-hover">
                     <thead>
                     <tr>
-                        <th><button id="accountBtnAdd" data-placement="top" data-toggle="tooltip" title="Add" class="btn btn-success btn-xs"><span class="fa fa-plus"></span></button></th>
+                        <!--<button id="accountBtnAdd" data-placement="top" data-toggle="tooltip" title="Add" class="btn btn-success btn-xs"><span class="fa fa-plus"></span></button>-->
+                        <th><a href="?controller=account&action=add" data-placement="top" data-toggle="tooltip" title="Add" class="btn btn-success btn-xs" role="button" aria-pressed="true"><span class="fa fa-plus"></span></a></th>
                         <th>Gebruikersnaam</th>
                         <th>Actief</th>
                         <th> </th>
@@ -23,7 +24,7 @@
                                 <td></td>
                                 <td class="username"><?php echo $account->getUsername();?></td>
                                 <td class="suspended"><?php echo $account->getSuspended();?></td>
-                                <td><button data-placement="top" data-toggle="tooltip" title="Edit" class="accountBtnEdit btn btn-primary btn-xs"><span class="fa fa-pencil"></span></button></td>
+                                <td><a href="?controller=account&action=edit&username=<?php echo $account->getUsername();?>" data-placement="top" data-toggle="tooltip" title="Edit" class="btn btn-primary btn-xs" role="button" aria-pressed="true"><span class="fa fa-pencil"></span></a></td>
                                 <td><button data-placement="top" data-toggle="tooltip" title="Suspend" class="accountBtnSuspend btn btn-danger btn-xs"><span class="fa fa-trash"></span></button></td>
                             </tr>
                         <script>

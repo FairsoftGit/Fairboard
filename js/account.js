@@ -9,9 +9,9 @@ $( document ).ready(function() {
         addAccount();
     });
 
-    $('#accountTable').on('click', "#accountBtnSave", function(){
+    $('#accountTable').on('click', "#accountBtnEdit", function(){
         var row = $(this).closest('tr');
-        saveAccount(row);
+        editAccount(row);
     });
     document.querySelector('#searchAccountInput').addEventListener('keyup', filterAccountTable, false);
 });
@@ -43,6 +43,11 @@ function addAccount(){
     cols += collEmpty + collUsername + collDeleteBtn + collSaveBtn;
     newRow.append(cols);
     $("#accountTable").prepend(newRow);
+}
+
+function editAccount(row){
+    var username = row.find(".username").html();
+
 }
 
 function suspendAccount(row){

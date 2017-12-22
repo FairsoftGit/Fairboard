@@ -18,9 +18,9 @@ function call($controller, $action) {
     $controller->{ $action }();
 }
 
-// we're adding an entry for the new controller and its actions
+// Add available actions for the controller
 $controllers = array('pages' => ['home', 'error'],
-                    'account' => ['index', 'suspend'],
+                    'account' => ['index', 'add', 'edit', 'suspend'],
                     'role' => ['index']);
 
 if (array_key_exists($controller, $controllers)) {

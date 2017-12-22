@@ -21,12 +21,26 @@ class Account {
         return $list;
     }
 
+    public static function editAccountInfo($username) {
+        $list = [];
+        $db = DBConnection::getInstance();
+        $req = $db->prepare('CALL edit_account(:username)');
+        $req->execute(array('username' => $username));
+        $result = $req->fetch();
+        $account = new Account($result['Username'], $result['Password'], $result['Suspended']);
+        $address = new Address($result['Street'], $result['Housenumber'], $result['Postcode'], $result['City'], $result['Province'] , $result['Country'], $result['TypeOfAddress']);
+        $list[] = $account;
+        $list[] = $address;
+        return $list;
+
+    }
+
     public static function find($username) {
         $db = DBConnection::getInstance();
-        $req = $db->prepare('SELECT * FROM account WHERE accountId = :username');
-        $req->execute(array('Username' => $username));
+        $req = $db->prepare('SELECT * FROM account WHERE username = :username');
+        $req->execute(array('username' => $username));
         $account = $req->fetch();
-        return new Account($account['Username'], $account['Password']);
+        return new Account($account['Username'], $account['Password'], $account['Suspended']);
     }
 
     public static function suspend($username) {

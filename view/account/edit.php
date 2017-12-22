@@ -58,11 +58,9 @@ $address = $list[1];
                                value="<?php echo $address->getCountry(); ?>">
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary">Opslaan</button>
-        </form>
-    </div>
-    </div>
     </div>
 </main>
 <script>

@@ -1,7 +1,8 @@
 # Create database
-/*CREATE DATABASE fairsoft2;
 
-USE fairsoft2;*/
+CREATE DATABASE fairsoft;
+USE fairsoft;
+
 
 # Remove existing tables
 DROP TABLE IF EXISTS account;
@@ -304,14 +305,14 @@ CREATE TABLE relation_seq (
 #Trigger to create unique sequencial Relationnumber
 DROP TRIGGER IF EXISTS tg_relation_insert; 
 
-DELIMITER $$
+DELIMITER //
 CREATE TRIGGER tg_relation_insert
 BEFORE INSERT ON relation
 FOR EACH ROW
 BEGIN
 	INSERT INTO relation_seq VALUES (NULL);
 	SET NEW.RelationNumber = CONCAT('REL', LPAD(LAST_INSERT_ID(), 4, '0'));
-END; 
+END//
 DELIMITER ;
 
 ## Extra table and trigger to create a sequencial alphanumberic OrderID
@@ -322,14 +323,14 @@ CREATE TABLE order_seq (
 #Trigger to create unique sequencial Relationnumber
 DROP TRIGGER IF EXISTS tg_order_insert;
 
-DELIMITER $$
+DELIMITER //
 CREATE TRIGGER tg_order_insert
 BEFORE INSERT ON `order`
 FOR EACH ROW
 BEGIN
 	INSERT INTO order_seq VALUES (NULL);
 	SET NEW.OrderID = CONCAT('ORD', LPAD(LAST_INSERT_ID(), 6, '0'));
-END; 
+END// 
 DELIMITER ;
 
 ## Extra table and trigger to create a sequencial alphanumberic OrderlineID
@@ -340,14 +341,14 @@ CREATE TABLE orderline_seq (
 #Trigger to create unique sequencial Relationnumber
 DROP TRIGGER IF EXISTS tg_orderline_insert;
 
-DELIMITER $$
+DELIMITER //
 CREATE TRIGGER tg_orderline_insert
 BEFORE INSERT ON orderline
 FOR EACH ROW
 BEGIN
 	INSERT INTO order_seq VALUES (NULL);
 	SET NEW.OrderlineID = CONCAT('ORDL', LPAD(LAST_INSERT_ID(), 10, '0'));
-END; 
+END// 
 DELIMITER ;
 
 

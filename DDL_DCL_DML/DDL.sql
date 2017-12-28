@@ -1,7 +1,7 @@
 # Create database
-CREATE DATABASE fairsoft;
+/*CREATE DATABASE fairsoft2;
 
-USE fairsoft;
+USE fairsoft2;*/
 
 # Remove existing tables
 DROP TABLE IF EXISTS account;
@@ -11,12 +11,15 @@ DROP TABLE IF EXISTS company;
 DROP TABLE IF EXISTS email;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS `order_seq`;
 DROP TABLE IF EXISTS orderline;
+DROP TABLE IF EXISTS orderline_seq;
 DROP TABLE IF EXISTS permission;
 DROP TABLE IF EXISTS person;
 DROP TABLE IF EXISTS phonenr;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS relation;
+DROP TABLE IF EXISTS relation_seq;
 DROP TABLE IF EXISTS relation_address;
 DROP TABLE IF EXISTS rent;
 DROP TABLE IF EXISTS role;
@@ -74,7 +77,7 @@ CREATE TABLE item(
 );
 
 CREATE TABLE `order`(
-	OrderID VARCHAR(15) UNIQUE NOT NULL AUTO_INCREMENT,
+	OrderID VARCHAR(15) DEFAULT '0' UNIQUE NOT NULL,
     OrderDate DATETIME NOT NULL,
     ACCOUNTUsername VARCHAR(100) NOT NULL,
     
@@ -82,7 +85,7 @@ CREATE TABLE `order`(
 );
 
 CREATE TABLE orderline(
-	OrderlineID VARCHAR(15) UNIQUE NOT NULL AUTO_INCREMENT,
+	OrderlineID VARCHAR(15) DEFAULT '0' UNIQUE NOT NULL,
     ORDEROrderID VARCHAR(15) NOT NULL,
     ITEMSerialNumber VARCHAR(50),
     
@@ -126,7 +129,7 @@ CREATE TABLE product(
 );
 
 CREATE TABLE relation(
-	RelationNumber VARCHAR(15) UNIQUE NOT NULL AUTO_INCREMENT,
+	RelationNumber VARCHAR(15) DEFAULT '0' NOT NULL, #see table relation_seq
     RelationType VARCHAR(15) NOT NULL,
     IsActive CHAR(1) DEFAULT 'Y' NOT NULL,
     
@@ -172,3 +175,73 @@ CREATE TABLE subscription(
     
     CONSTRAINT subscriptionPK PRIMARY KEY (ORDERLINEOrderlineID)
 );
+
+### ADD FK CONSTRAINTS TO TABLES ###
+
+
+
+### END FK CONSTRAINTS ###
+
+ 
+
+### TRIGGERS AND TABLES ESPECIALLY FOR GENERATING ALPHANUMERIC AUTO_INCREMENTAL RELATIONNUMBERS< ORDERID's AND ORDERLINEID's
+
+
+## Extra table and trigger to create a sequencial alphanumberic RelationNumber
+CREATE TABLE relation_seq (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+#Trigger to create unique sequencial Relationnumber
+DROP TRIGGER IF EXISTS tg_relation_insert; 
+
+DELIMITER $$
+CREATE TRIGGER tg_relation_insert
+BEFORE INSERT ON relation
+FOR EACH ROW
+BEGIN
+	INSERT INTO relation_seq VALUES (NULL);
+	SET NEW.RelationNumber = CONCAT('REL', LPAD(LAST_INSERT_ID(), 4, '0'));
+END; 
+DELIMITER ;
+
+## Extra table and trigger to create a sequencial alphanumberic OrderID
+CREATE TABLE order_seq (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+#Trigger to create unique sequencial Relationnumber
+DROP TRIGGER IF EXISTS tg_order_insert;
+
+DELIMITER $$
+CREATE TRIGGER tg_order_insert
+BEFORE INSERT ON `order`
+FOR EACH ROW
+BEGIN
+	INSERT INTO order_seq VALUES (NULL);
+	SET NEW.OrderID = CONCAT('ORD', LPAD(LAST_INSERT_ID(), 6, '0'));
+END; 
+DELIMITER ;
+
+## Extra table and trigger to create a sequencial alphanumberic OrderlineID
+CREATE TABLE orderline_seq (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+#Trigger to create unique sequencial Relationnumber
+DROP TRIGGER IF EXISTS tg_orderline_insert;
+
+DELIMITER $$
+CREATE TRIGGER tg_orderline_insert
+BEFORE INSERT ON orderline
+FOR EACH ROW
+BEGIN
+	INSERT INTO order_seq VALUES (NULL);
+	SET NEW.OrderlineID = CONCAT('ORDL', LPAD(LAST_INSERT_ID(), 10, '0'));
+END; 
+DELIMITER ;
+
+
+### END ###
+
+

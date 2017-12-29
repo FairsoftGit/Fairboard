@@ -5,11 +5,6 @@
   background-color: rgba(246, 160, 23, 0.8);
 }
 
-table tbody div{
-  height: 200px;
-  overflow-y: auto;
-}
-
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 body {
   padding-top: 3.5rem;

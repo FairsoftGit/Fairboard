@@ -1,61 +1,148 @@
 <?php
-class Account {
+
+class Account
+{
     private $username;
     private $password;
-    private $suspended;
+    private $status;
+    private $relationId;
 
-    public function __construct($username, $password, $suspended){
+    public function __construct($username, $password, $status, $relationId)
+    {
         $this->username = $username;
         $this->password = $password;
-        $this->suspended = $suspended;
+        $this->status = $status;
+        $this->relationId = $relationId;
     }
 
-    public static function all() {
-        $list = [];
+    public static function chart_account_status()
+    {
+        $resultArray = [];
         $db = DBConnection::getInstance();
-        $req = $db->query('SELECT * FROM account');
+        $stmt = $db->prepare('CALL sp_chart_account_status(@totalAccounts, @totalActiveAccounts)');
+        $stmt->execute();
+        $result = $db->query("SELECT @totalAccounts, @totalActiveAccounts")
+            ->fetch(PDO::FETCH_ASSOC);
+        $resultArray[] = $result['@totalAccounts'];
+        $resultArray[] = $result['@totalActiveAccounts'];
+        return $resultArray;
+    }
 
-        foreach($req->fetchAll() as $account) {
-            $list[] = new Account($account['Username'], $account['Password'], $account['Suspended']);
+    public static function all()
+    {
+        $accounts = [];
+        $db = DBConnection::getInstance();
+        $req = $db->query('SELECT * FROM account ORDER BY username');
+
+        foreach ($req->fetchAll() as $account) {
+            $accounts[] = new Account($account['username'], $account['password'], $account['status'], $account['relationId']);
         }
-        return $list;
+        return $accounts;
     }
 
-    public static function editAccountInfo($username) {
+    public static function getAccountEditData($relationId)
+    {
         $list = [];
         $db = DBConnection::getInstance();
-        $req = $db->prepare('CALL edit_account(:username)');
-        $req->execute(array('username' => $username));
+        $req = $db->prepare('CALL sp_getAccountEditData(:relationId)');
+        $req->execute(array('relationId' => $relationId));
         $result = $req->fetch();
-        $account = new Account($result['Username'], $result['Password'], $result['Suspended']);
-        $address = new Address($result['Street'], $result['Housenumber'], $result['Postcode'], $result['City'], $result['Province'] , $result['Country'], $result['TypeOfAddress']);
+        $account = new Account($result['username'], $result['password'], $result['status'], $result['relationId']);
+        $address = new Address($result['relationId'], $result['street'], $result['housenumber'], $result['housenumberAddition'], $result['zipcode'], $result['city'], $result['province'], $result['country'], $result['addressType'], $result['validFrom'], $result['validTo'] );
+        $person = new Person($result['firstname'], $result['lastname'], $result['middlename'], $result['gender'], $result['birthdate'], $result['relationId']);
         $list[] = $account;
         $list[] = $address;
+        $list[] = $person;
         return $list;
 
     }
 
-    public static function find($username) {
+    public static function create($username, $password, $status)
+    {
+        $status = intval($status);
         $db = DBConnection::getInstance();
-        $req = $db->prepare('SELECT * FROM account WHERE username = :username');
-        $req->execute(array('username' => $username));
-        $account = $req->fetch();
-        return new Account($account['Username'], $account['Password'], $account['Suspended']);
+        $stmt = $db->prepare('CALL sp_insertAccount(?,?,?)');
+        $stmt->bindParam(1, $username,  PDO::PARAM_STR);
+        $stmt->bindParam(2, $password,   PDO::PARAM_STR);
+        $stmt->bindParam(3, $status,   PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['relationId'];
     }
 
-    public static function suspend($username) {
+    public static function update($relationId, $username, $password, $status)
+    {
+        $relationId = intval($relationId);
+        $status = intval($status);
         $db = DBConnection::getInstance();
-        $req = $db->prepare("UPDATE account set Suspended = 'Y' where username = :username");
-        $req->execute(array('username' => $username));
+        $stmt = $db->prepare('CALL sp_updateAccount(?,?,?,?)');
+        $stmt->bindParam(1, $relationId,  PDO::PARAM_INT);
+        $stmt->bindParam(2, $username,  PDO::PARAM_STR);
+        $stmt->bindParam(3, $password,   PDO::PARAM_STR);
+        $stmt->bindParam(4, $status,   PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    public function getUsername(){
+    public static function submitEditData($accountForUpdate, $addressForUpdate, $personForUpdate)
+    {
+        $db = DBConnection::getInstance();
+        $req = $db->prepare('CALL sp_submitEditData(
+        :relationId,
+        :username,
+        :password,
+        :status,
+        :street,
+        :housenumber,
+        :housenumberAddition,
+        :zipcode,
+        :city,
+        :province,
+        :country,
+        :addressType,
+        :firstname,
+        :lastname,
+        :middlename,
+        :gender,
+        :birthdate
+        )');
+        $req->execute(array(
+            'relationId' => $accountForUpdate->getRelationId(),
+            'username' => $accountForUpdate->getUsername(),
+            'password' => $accountForUpdate->getPassword(),
+            'status' => $accountForUpdate->getStatus(),
+            'street' => $addressForUpdate->getStreet(),
+            'housenumber' => $addressForUpdate->getHousenumber(),
+            'housenumberAddition' => $addressForUpdate->getHousenumberAddition(),
+            'zipcode' => $addressForUpdate->getZipcode(),
+            'city' => $addressForUpdate->getHousenumber(),
+            'province' => $addressForUpdate->getProvince(),
+            'country' => $addressForUpdate->getCountry(),
+            'addressType' => $addressForUpdate->getAddressType(),
+            'firstname' => $personForUpdate->getFirstname(),
+            'lastname' => $personForUpdate->getLastname(),
+            'middlename' => $personForUpdate->getMiddlename(),
+            'gender' => $personForUpdate->getGender(),
+            'birthdate' => $personForUpdate->getBirthdate(),
+        ));
+    }
+
+    public function getUsername()
+    {
         return $this->username;
     }
-    public function getPassword(){
+
+    public function getPassword()
+    {
         return $this->password;
     }
-    public function getSuspended(){
-        return $this->suspended;
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function getRelationId()
+    {
+        return $this->relationId;
     }
 }

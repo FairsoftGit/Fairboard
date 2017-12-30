@@ -1,7 +1,7 @@
 # Create database
 
-CREATE DATABASE fairsoft;
-USE fairsoft;
+CREATE DATABASE sightvision_fairsoft;
+USE sightvision_fairsoft;
 
 
 # Remove existing tables
@@ -355,3 +355,36 @@ DELIMITER ;
 ### END ###
 
 
+### STORED PROCEDURES ###
+#
+# Stored Procedure to create an customer account with filled-in tables: relation - account - person - address
+DELIMITER //
+CREATE PROCEDURE create_customer 
+(IN spUsername VARCHAR(200), spPassword VARCHAR(255), spName VARCHAR(50), spLastName VARCHAR(60),
+spMiddleName VARCHAR(10), spGender CHAR(1), spBirthDate DATE, spStreet VARCHAR(100),
+spHousenumber VARCHAR(10), spPostcode VARCHAR(15), spProvince VARCHAR(30), spCountry VARCHAR(60),
+spTypeOfAddress VARCHAR(10))
+BEGIN
+	INSERT INTO relation (RelationType) VALUES ('Debiteur');
+	
+	SET @relnum = (SELECT RelationNumber
+						FROM relation					
+						ORDER BY RelationNumber DESC
+						LIMIT 1);
+						
+	SET @adPK1 = spStreet;
+	SET @adPK2 = spHousenumber;
+	SET @adPK3 = spPostcode;
+	
+	INSERT INTO account (Username, `Password`, RELATIONRelationNumber)
+	VALUES (spUsername, spPassword, @relnum);
+	
+	INSERT INTO person (Name, LastName, MiddleName, Gender, BirthDate, RELATIONRelationNumber)
+	VALUES (spName, spLastName, spMiddleName, spGender, spBirthDate, @relnum);
+	
+	INSERT INTO address (Street, Housenumber, Postcode, Province, Country, TypeOfAddress)
+	VALUES (@adPK1, @adPK2, @adPK3, spProvince, spCountry, spTypeOfAddress);
+	
+	INSERT INTO relation_address VALUES (@relnum, @adPK1, @adPK2, @adPK3);
+END //
+DELIMITER ;

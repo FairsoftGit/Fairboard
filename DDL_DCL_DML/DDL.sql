@@ -388,4 +388,3 @@ BEGIN
 	INSERT INTO relation_address VALUES (@relnum, @adPK1, @adPK2, @adPK3);
 END //
 DELIMITER ;
-

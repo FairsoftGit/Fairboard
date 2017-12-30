@@ -10,9 +10,13 @@ function call($controller, $action) {
             require_once('model/Account.php');
             $controller = new AccountController();
             break;
-        case 'role':
-            require_once('model/Role.php');
-            $controller = new RoleController();
+        case 'person':
+            require_once('model/Person.php');
+            $controller = new PersonController();
+            break;
+        case 'address':
+            require_once('model/Address.php');
+            $controller = new AddressController();
             break;
     }
     $controller->{ $action }();
@@ -20,8 +24,9 @@ function call($controller, $action) {
 
 // Add available actions for the controller
 $controllers = array('pages' => ['home', 'error'],
-                    'account' => ['index', 'add', 'edit', 'suspend'],
-                    'role' => ['index']);
+                    'account' => ['index', 'add', 'edit', 'create', 'update'],
+                    'person' => ['create', 'update'],
+                    'address' => ['create', 'update']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

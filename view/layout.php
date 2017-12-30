@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Fairboard</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -22,7 +22,7 @@
 <!--NAVIGATION-->
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Dashboard</a>
+        <a class="navbar-brand" href="\Fairboard">Fairsoft</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
                 data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -43,13 +43,13 @@
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link navLinkOverview" href="\Fairboard">Overview</a>
+                    <a class="nav-link navLinkFairboard" href="\Fairboard">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link navLinkAccount" href="?controller=account&action=index">Accounts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link navLinkRole" href="?controller=role&action=index">Roles</a>
+                    <a class="nav-link navLinkSupplier" href="#">Leveranciers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link navLinkStock" href="#">Voorraad</a>
@@ -68,6 +68,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 <script src="js/general.js"></script>
 </body>
 </html>

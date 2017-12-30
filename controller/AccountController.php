@@ -8,37 +8,43 @@ class AccountController
     }
 
     public function add() {
-        //header('location: ?controller=account&action=index');
-        //exit();
         require_once('view/account/add.php');
     }
 
-    public function edit() {
-        if (!isset($_GET['username']))
+    public function edit(){
+        require_once 'model/Person.php';
+        require_once 'model/Address.php';
+        require_once 'model/Country.php';
+
+        if (!isset($_GET['relationId']))
             return call('pages', 'error');
-        include_once 'model/address.php';
-        $list = Account::editAccountInfo($_GET['username']);
-        //header('location: ?controller=account&action=index');
-        //exit();
+        $list = Account::getAccountEditData($_GET['relationId']);
+        $account = $list[0];
+        $address = $list[1];
+        $person = $list[2];
+
+        if($account->getRelationid() == null){
+            return call('pages', 'error');
+        }
+        $countryList = Country::all();
         require_once('view/account/edit.php');
     }
 
-    public function suspend() {
-        if (!isset($_POST['username']))
+    public function update() {
+        if (!isset($_POST['relationId']) || !isset($_POST['username']) || !isset($_POST['password']))
             return call('pages', 'error');
 
-        Account::suspend($_POST['username']);
-       // header('location: ?controller=account&action=index');
+        Account::update($_POST['relationId'], $_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));
+        header('location: ?controller=account&action=edit&relationId='.$_POST['relationId']);
         exit();
     }
 
-    public function save() {
-        //
-        if (!isset($_POST['username']))
+    public function create() {
+        if (!isset($_POST['username']) || !isset($_POST['password']))
             return call('pages', 'error');
 
-        Account::delete($_POST['username']);
-        // header('location: ?controller=account&action=index');
+        $relationId  = Account::create($_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));
+        header('location: ?controller=account&action=edit&relationId='.$relationId);
         exit();
     }
 }

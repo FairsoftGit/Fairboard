@@ -16,14 +16,14 @@ class AccountController
         require_once 'model/Address.php';
         require_once 'model/Country.php';
 
-        if (!isset($_GET['relationId']))
+        if (!isset($_GET['relationNumber']))
             return call('pages', 'error');
-        $list = Account::getAccountEditData($_GET['relationId']);
+        $list = Account::getAccountEditData($_GET['relationNumber']);
         $account = $list[0];
         $address = $list[1];
         $person = $list[2];
 
-        if($account->getRelationid() == null){
+        if($account->getRelationNumber() == null){
             return call('pages', 'error');
         }
         $countryList = Country::all();
@@ -31,11 +31,11 @@ class AccountController
     }
 
     public function update() {
-        if (!isset($_POST['relationId']) || !isset($_POST['username']) || !isset($_POST['password']))
+        if (!isset($_POST['relationNumber']) || !isset($_POST['username']) || !isset($_POST['password']))
             return call('pages', 'error');
 
-        Account::update($_POST['relationId'], $_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));
-        header('location: ?controller=account&action=edit&relationId='.$_POST['relationId']);
+        Account::update($_POST['relationNumber'], $_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));
+        header('location: ?controller=account&action=edit&relationNumber='.$_POST['relationNumber']);
         exit();
     }
 
@@ -44,7 +44,7 @@ class AccountController
             return call('pages', 'error');
 
         $relationId  = Account::create($_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));
-        header('location: ?controller=account&action=edit&relationId='.$relationId);
+        header('location: ?controller=account&action=edit&relationNumber='.$relationId);
         exit();
     }
 }

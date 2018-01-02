@@ -5,14 +5,14 @@ class Account
     private $username;
     private $password;
     private $status;
-    private $relationId;
+    private $relationNumber;
 
-    public function __construct($username, $password, $status, $relationId)
+    public function __construct($username, $password, $status, $relationNumber)
     {
         $this->username = $username;
         $this->password = $password;
         $this->status = $status;
-        $this->relationId = $relationId;
+        $this->relationNumber = $relationNumber;
     }
 
     public static function chart_account_status()
@@ -40,16 +40,16 @@ class Account
         return $accounts;
     }
 
-    public static function getAccountEditData($relationId)
+    public static function getAccountEditData($relationNumber)
     {
         $list = [];
         $db = DBConnection::getInstance();
-        $req = $db->prepare('CALL sp_getAccountEditData(:relationId)');
-        $req->execute(array('relationId' => $relationId));
+        $req = $db->prepare('CALL sp_getAccountEditData(:relationNumber)');
+        $req->execute(array('relationNumber' => $relationNumber));
         $result = $req->fetch();
         $account = new Account($result['username'], $result['password'], $result['status'], $result['relationNumber']);
-        $address = new Address($result['relationNumber'], $result['street'], $result['housenumber'], $result['postcode'], $result['city'], $result['province'], $result['countryCode'], $result['typeOfAddress'] );
-        $person = new Person($result['name'], $result['lastName'], $result['middleName'], $result['gender'], $result['birthDate'], $result['relationNumber']);
+        $address = new Address($result['street'], $result['housenumber'], $result['housenumberAddition'],  $result['postcode'], $result['city'], $result['province'], $result['countryCode'], $result['typeOfAddress'] );
+        $person = new Person($result['firstName'], $result['lastName'], $result['middleName'], $result['gender'], $result['birthDate'], $result['relationNumber']);
         $list[] = $account;
         $list[] = $address;
         $list[] = $person;
@@ -61,22 +61,21 @@ class Account
     {
         $status = intval($status);
         $db = DBConnection::getInstance();
-        $stmt = $db->prepare('CALL sp_insertAccount(?,?,?)');
+        $stmt = $db->prepare('CALL sp_createAccount(?,?,?)');
         $stmt->bindParam(1, $username,  PDO::PARAM_STR);
         $stmt->bindParam(2, $password,   PDO::PARAM_STR);
         $stmt->bindParam(3, $status,   PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['relationId'];
+        return $result['RELATIONrelationNumber'];
     }
 
-    public static function update($relationId, $username, $password, $status)
+    public static function update($relationNumber, $username, $password, $status)
     {
-        $relationId = intval($relationId);
         $status = intval($status);
         $db = DBConnection::getInstance();
         $stmt = $db->prepare('CALL sp_updateAccount(?,?,?,?)');
-        $stmt->bindParam(1, $relationId,  PDO::PARAM_STR);
+        $stmt->bindParam(1, $relationNumber,  PDO::PARAM_INT);
         $stmt->bindParam(2, $username,  PDO::PARAM_STR);
         $stmt->bindParam(3, $password,   PDO::PARAM_STR);
         $stmt->bindParam(4, $status,   PDO::PARAM_INT);
@@ -141,8 +140,8 @@ class Account
         return $this->status;
     }
 
-    public function getRelationId()
+    public function getRelationNumber()
     {
-        return $this->relationId;
+        return $this->relationNumber;
     }
 }

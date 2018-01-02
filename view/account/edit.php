@@ -54,10 +54,10 @@ function printCountryOptions($countryList, $code) {
                             </label>
                         </div>
                         <div class="form-group">
-                            <label for="inputRelationId">Relatienummer</label>
-                            <input readonly name="relationId" type="text" class="form-control" id="inputRelationId"
+                            <label for="inputRelationNumber">Relatienummer</label>
+                            <input readonly name="relationNumber" type="text" class="form-control" id="inputRelationNumber"
                                    placeholder=""
-                                   value="<?php echo $account->getRelationId(); ?>">
+                                   value="<?php echo $account->getRelationNumber(); ?>">
                         </div>
                         <div class="form-group">
                             <label for="inputUsername">Gebruikersnaam</label>
@@ -78,34 +78,34 @@ function printCountryOptions($countryList, $code) {
                 <div class="tab-pane fade" id="nav-person" role="tabpanel" aria-labelledby="nav-person-tab">
                     <form id="person-form" class="my-4 col-md-6" action="?controller=person&action=update"
                           method="POST">
-                        <input name="relationId" type="hidden" class="form-control"
-                               value="<?php echo $person->getRelationId(); ?>">
+                        <input name="relationNumber" type="hidden" class="form-control"
+                               value="<?php echo $person->getRelationNumber(); ?>">
                         <div class="form-group">
-                            <label for="inputFirstname">Voornaam</label>
-                            <input name="firstname" type="text" class="form-control" id="inputFirstname" placeholder="Voornaam"
+                            <label for="inputFirstName">Voornaam</label>
+                            <input name="firstName" type="text" class="form-control" id="inputFirstName" placeholder="Voornaam"
                                    value="<?php echo $person->getFirstname(); ?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputMiddlename">Tussenvoegsel</label>
-                            <input name="middlename" type="text" class="form-control" id="inputMiddlename"
+                            <label for="inputMiddleName">Tussenvoegsel</label>
+                            <input name="middleName" type="text" class="form-control" id="inputMiddleName"
                                    placeholder="Tussenvoegsel"
-                                   value="<?php echo $person->getMiddlename(); ?>">
+                                   value="<?php echo $person->getMiddleName(); ?>">
                         </div>
                         <div class="form-group">
-                            <label for="inputLastname">Achternaam</label>
-                            <input name="lastname" type="text" class="form-control" id="inputLastname" placeholder="Achternaam"
-                                   value="<?php echo $person->getLastname(); ?>" required>
+                            <label for="inputLastName">Achternaam</label>
+                            <input name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Achternaam"
+                                   value="<?php echo $person->getLastName(); ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="inputGender">Geslacht</label>
 
                             <select name="gender" type="text" class="form-control" id="inputGender" required>
                                 <?php
-                                if($person->getGender() == 'Man'){
+                                if($person->getGender() == 'M'){
                                     echo "<option>Man</option>";
                                     echo "<option>Vrouw</option>";
                                 }
-                                else if($person->getGender() == 'Vrouw'){
+                                else if($person->getGender() == 'V'){
                                     echo "<option>Vrouw</option>";
                                     echo "<option>Man</option>";
                                 }
@@ -119,11 +119,11 @@ function printCountryOptions($countryList, $code) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="inputBirthdate">Geboortedatum</label>
-                            <input name="birthdate" type="date" class="form-control" id="inputBirthdate" placeholder="Geboortedatum"
+                            <label for="inputBirthDate">Geboortedatum</label>
+                            <input name="birthDate" type="date" class="form-control" id="inputBirthDate" placeholder="Geboortedatum"
                                    value="<?php
-                                   if($person->getBirthdate() != '0000-00-00'){
-                                       echo date( 'Y-m-d', strtotime( $person->getBirthdate()));
+                                   if($person->getBirthDate() != '0000-00-00'){
+                                       echo date( 'Y-m-d', strtotime( $person->getBirthDate()));
                                    }
                                     ?>" required>
                         </div>
@@ -134,8 +134,8 @@ function printCountryOptions($countryList, $code) {
                 <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
                     <form id="address-form" class="my-4 col-md-6" action="?controller=address&action=update"
                           method="POST">
-                        <input name="relationId" type="hidden" class="form-control"
-                               value="<?php echo $person->getRelationId(); ?>">
+                        <input name="relationNumber" type="hidden" class="form-control"
+                               value="<?php echo $person->getRelationNumber(); ?>">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="inputStreet">Straatnaam</label>
@@ -159,7 +159,7 @@ function printCountryOptions($countryList, $code) {
                             <div class="form-group col-md-6">
                                 <label for="inputZipcode">Postcode</label>
                                 <input name="zipcode" type="text" class="form-control" id="inputZipcode" placeholder=""
-                                       value="<?php echo $address->getZipcode(); ?>" required>
+                                       value="<?php echo $address->getPostcode(); ?>" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Stad</label>
@@ -178,7 +178,7 @@ function printCountryOptions($countryList, $code) {
                                 <label for="inputCountry">Land</label>
                                 <select name="country" type="text" class="form-control" id="inputCountry" required>
                                     <?php
-                                        printCountryOptions($countryList, $address->getCountry());
+                                        printCountryOptions($countryList, $address->getCountryCode());
                                     ?>
                                 </select>
                             </div>
@@ -187,45 +187,30 @@ function printCountryOptions($countryList, $code) {
                             <label for="inputAddressType">Type adres</label>
                             <select name="addressType" type="text" class="form-control" id="inputAddressType" required>
                                 <?php
-                                if ($address->getAddressType() == 'Postadres'){
+                                if ($address->getTypeOfAddress() == 'Beide'){
+                                    echo "<option>Beide</option>";
                                     echo "<option>Postadres</option>";
                                     echo "<option>Afleveradres</option>";
                                 }
-
-                                else if ($address->getAddressType() == 'Afleveradres'){
+                                else if ($address->getTypeOfAddress() == 'Afleveradres'){
                                     echo "<option>Afleveradres</option>";
                                     echo "<option>Postadres</option>";
+                                    echo "<option>Beide</option>";
+                                }
+                                else if ($address->getTypeOfAddress() == 'Postadres'){
+                                    echo "<option>Postadres</option>";
+                                    echo "<option>Afleveradres</option>";
+                                    echo "<option>Beide</option>";
                                 }
                                 else {
                                     echo "<option></option>";
                                     echo "<option>Postadres</option>";
                                     echo "<option>Afleveradres</option>";
+                                    echo "<option>Beide</option>";
                                 }
                                 ?>
                             </select>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputAddressValidFrom">Geldig vanaf</label>
-                                <input name="validFrom" type="datetime-local" class="form-control"
-                                       id="inputAddressValidFrom"
-                                       placeholder=""
-                                       value="<?php
-                                       if($address->getValidFrom() == ''){
-                                           echo date("Y-m-d\TH:i:s");
-                                       }
-                                       else {
-                                           echo date( 'Y-m-d\TH:i:s', strtotime( $address->getValidFrom()));
-                                       }
-                                       ?>" step="1" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputAddressValidTo">Geldig tot</label>
-                                <input name="validTo" type="datetime-local" class="form-control"
-                                       id="inputAddressValidTo"
-                                       placeholder=""
-                                       value="" step="1">
-                            </div>
                             <button type="submit" class="btn btn-primary">Opslaan</button>
                     </form>
                 </div> <!-- Address tab-->

@@ -2,50 +2,49 @@
 
 class Person
 {
-    private $firstname;
-    private $lastname;
-    private $middlename;
+    private $firstName;
+    private $lastName;
+    private $middleName;
     private $gender;
-    private $birthdate;
-    private $relationId;
+    private $birthDate;
+    private $relationNumber;
 
-    public function __construct($firstname, $lastname, $middlename, $gender, $birthdate, $relationId)
+    public function __construct($firstName, $middleName, $lastName, $gender, $birthDate, $relationNumber)
     {
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->middlename = $middlename;
+        $this->firstName = $firstName;
+        $this->middleName = $middleName;
+        $this->lastName = $lastName;
         $this->gender = $gender;
-        $this->birthdate = $birthdate;
-        $this->relationId = $relationId;
+        $this->birthDate = $birthDate;
+        $this->relationNumber = $relationNumber;
     }
 
-    public static function save($relationId, $firstname, $lastname, $middlename, $gender, $birthdate)
+    public static function save($relationNumber, $firstName, $middleName, $lastName, $gender, $birthDate)
     {
-        $relationId = intval($relationId);
         $db = DBConnection::getInstance();
         $stmt = $db->prepare('CALL sp_savePerson(?,?,?,?,?,?)');
-        $stmt->bindParam(1, $relationId,  PDO::PARAM_INT);
-        $stmt->bindParam(2, $firstname,  PDO::PARAM_STR);
-        $stmt->bindParam(3, $lastname,   PDO::PARAM_STR);
-        $stmt->bindParam(4, $middlename,   PDO::PARAM_STR);
+        $stmt->bindParam(1, $relationNumber,  PDO::PARAM_STR);
+        $stmt->bindParam(2, $firstName,  PDO::PARAM_STR);
+        $stmt->bindParam(3, $middleName,   PDO::PARAM_STR);
+        $stmt->bindParam(4, $lastName,   PDO::PARAM_STR);
         $stmt->bindParam(5, $gender,   PDO::PARAM_STR);
-        $stmt->bindParam(6, $birthdate,   PDO::PARAM_STR);
+        $stmt->bindParam(6, $birthDate,   PDO::PARAM_STR);
         $stmt->execute();
     }
 
-    public function getFirstname()
+    public function getFirstName()
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
-    public function getLastname()
+    public function getLastName()
     {
-        return $this->lastname;
+        return $this->lastName;
     }
 
-    public function getMiddlename()
+    public function getMiddleName()
     {
-        return $this->middlename;
+        return $this->middleName;
     }
 
     public function getGender()
@@ -53,13 +52,13 @@ class Person
         return $this->gender;
     }
 
-    public function getBirthdate()
+    public function getBirthDate()
     {
-        return $this->birthdate;
+        return $this->birthDate;
     }
 
-    public function getRelationId()
+    public function getRelationNumber()
     {
-        return $this->relationId;
+        return $this->relationNumber;
     }
 }

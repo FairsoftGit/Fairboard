@@ -5,7 +5,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="\Fairboard">Home</a></li>
                     <li class="breadcrumb-item"><a href="?controller=account&action=index">Account</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Nieuw</li>
+                    <li class="breadcrumb-item active" aria-current="page">Nieuw account</li>
                 </ol>
             </nav>
             <h2 class="my-4">Nieuw account</h2>

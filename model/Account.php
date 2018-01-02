@@ -48,7 +48,7 @@ class Account
         $req->execute(array('relationNumber' => $relationNumber));
         $result = $req->fetch();
         $account = new Account($result['username'], $result['password'], $result['status'], $result['relationNumber']);
-        $address = new Address($result['street'], $result['housenumber'], $result['housenumberAddition'],  $result['postcode'], $result['city'], $result['province'], $result['countryCode'], $result['typeOfAddress'] );
+        $address = new Address($result['street'], $result['housenumber'],  $result['postcode'], $result['city'], $result['province'], $result['countryCode'], $result['typeOfAddress'] );
         $person = new Person($result['firstName'], $result['lastName'], $result['middleName'], $result['gender'], $result['birthDate'], $result['relationNumber']);
         $list[] = $account;
         $list[] = $address;
@@ -92,7 +92,6 @@ class Account
         :status,
         :street,
         :housenumber,
-        :housenumberAddition,
         :zipcode,
         :city,
         :province,
@@ -111,7 +110,6 @@ class Account
             'status' => $accountForUpdate->getStatus(),
             'street' => $addressForUpdate->getStreet(),
             'housenumber' => $addressForUpdate->getHousenumber(),
-            'housenumberAddition' => $addressForUpdate->getHousenumberAddition(),
             'zipcode' => $addressForUpdate->getZipcode(),
             'city' => $addressForUpdate->getHousenumber(),
             'province' => $addressForUpdate->getProvince(),

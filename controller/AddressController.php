@@ -11,9 +11,9 @@ class AddressController
 
     public function update() {
         if (!isset($_POST['relationNumber']) || !isset($_POST['street']) || !isset($_POST['housenumber']) || !isset($_POST['housenumberAddition'])|| !isset($_POST['postcode']) || !isset($_POST['typeOfAddress']))
-            return call('pages', 'error');
+            //return call('pages', 'error');
 
-        Address::save($_POST['relationNumber'], $_POST['street'], $_POST['housenumber'], $_POST['housenumberAddition'], $_POST['postcode'], $_POST['city'], $_POST['province'], $_POST['country'], $_POST['typeOfAddress']);
+        Address::save($_POST['relationNumber'], $_POST['street'], $_POST['housenumber'], $_POST['postcode'], $_POST['city'], $_POST['province'], $_POST['country'], $_POST['typeOfAddress']);
         header('location: ?controller=account&action=edit&relationNumber='.$_POST['relationNumber']);
         exit();
     }

@@ -142,22 +142,16 @@ function printCountryOptions($countryList, $code) {
                         <input name="relationNumber" type="hidden" class="form-control"
                                value="<?php echo $person->getRelationNumber(); ?>">
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label for="inputStreet">Straatnaam</label>
                                 <input name="street" type="text" class="form-control" id="inputStreet" placeholder="Straatnaam"
                                        value="<?php echo $address->getStreet(); ?>" required>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label for="inputHousenumber">Huisnummer</label>
-                                <input name="housenumber" type="number" class="form-control" id="inputHousenumber"
+                                <input name="housenumber" type="text" class="form-control" id="inputHousenumber"
                                        placeholder="Huisnummer"
                                        value="<?php echo $address->getHousenumber(); ?>" required>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputHousenumberAddition">Toevoeging</label>
-                                <input name="housenumberAddition" type="text" class="form-control"
-                                       id="inputHousenumberAddition" placeholder="Toegoeging"
-                                       value="<?php echo $address->getHousenumberAddition(); ?>">
                             </div>
                         </div>
                         <div class="form-row">

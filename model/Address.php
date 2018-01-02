@@ -18,13 +18,13 @@ class Address {
         $this->typeOfAddress = $typeOfAddress;
     }
 
-    public static function save($street, $housenumber, $postcode, $city, $province, $countryCode, $typeOfAddress)
+    public static function save($relationNumber, $street, $housenumber, $postcode, $city, $province, $countryCode, $typeOfAddress)
     {
         $db = DBConnection::getInstance();
         $stmt = $db->prepare('CALL sp_saveAddress(?,?,?,?,?,?,?,?)');
-        $stmt->bindParam(1, $relationId,  PDO::PARAM_INT);
+        $stmt->bindParam(1, $relationNumber,   PDO::PARAM_STR);
         $stmt->bindParam(2, $street,  PDO::PARAM_STR);
-        $stmt->bindParam(3, $housenumber,   PDO::PARAM_STR);
+        $stmt->bindParam(3, $housenumber,  PDO::PARAM_STR);
         $stmt->bindParam(4, $postcode,   PDO::PARAM_STR);
         $stmt->bindParam(5, $city,   PDO::PARAM_STR);
         $stmt->bindParam(6, $province,   PDO::PARAM_STR);

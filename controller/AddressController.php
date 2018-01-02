@@ -6,7 +6,7 @@ class AddressController
         if (!isset($_POST['relationNumber']) || !isset($_POST['street']) || !isset($_POST['housenumber']) || !isset($_POST['postcode']) || !isset($_POST['typeOfAddress']))
             return call('pages', 'error');
 
-        Address::save($_POST['relationNumber'], $_POST['street'], $_POST['housenumber'], $_POST['postcode'], $_POST['city'], $_POST['province'], $_POST['countryCode'], $_POST['typeOfAddress'] );
+        Address::save($_POST['relationNumber'], $_POST['street'], $_POST['housenumber'], $_POST['postcode'], $_POST['city'], $_POST['province'], $_POST['countryCode'], $_POST['typeOfAddress']);
     }
 
     public function update() {

@@ -467,7 +467,7 @@ BEGIN
 		address.Street, address.Housenumber, address.Postcode, address.City, address.Province, address.CountryCode, address.TypeOfAddress, 
 		person.Name, person.MiddleName, person.LastName, person.Gender, person.BirthDate 
    FROM relation
-	LEFT JOIN account
+	INNER JOIN account
 		ON relation.RelationNumber = account.RELATIONRelationNumber
 	LEFT JOIN person
 		ON relation.RelationNumber = person.RELATIONRelationNumber
@@ -481,7 +481,7 @@ BEGIN
 		ON relation.RelationNumber = email.RELATIONRelationNumber
 	LEFT JOIN phonenr
 		ON relation.RelationNumber = phonenr.RELATIONRelationNumber
-	WHERE relation.RelationNumber = _relationNR;
+	WHERE relation.RelationNumber = 'REL0011';
 END //
 
 DELIMITER;

@@ -18,6 +18,11 @@ function call($controller, $action) {
             require_once('model/Address.php');
             $controller = new AddressController();
             break;
+        case 'product':
+            require_once ('model/Product.php');
+            $controller = new ProductController();
+            break;
+
     }
     $controller->{ $action }();
 }
@@ -26,7 +31,8 @@ function call($controller, $action) {
 $controllers = array('pages' => ['home', 'error'],
                     'account' => ['index', 'add', 'edit', 'create', 'update'],
                     'person' => ['create', 'update'],
-                    'address' => ['create', 'update']);
+                    'address' => ['create', 'update'],
+                    'product' => ['index', 'create', 'update', 'delete'],);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

@@ -17,7 +17,12 @@ function printCountryOptions($countryList, $code) {
             }
         }
     foreach ($newArray as $country) {
-        echo "<option value=".$country->getCode().">".$country->getName_dutch()."</option>";
+        if($country->getCode() == ''){
+            echo "<option value='' disabled selected>Selecteer een land</option>";
+        }
+        else{
+            echo "<option value=".$country->getCode().">".$country->getName_dutch()."</option>";
+        }
     }
 }
 ?>
@@ -28,7 +33,7 @@ function printCountryOptions($countryList, $code) {
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="\Fairboard">Home</a></li>
                     <li class="breadcrumb-item"><a href="?controller=account&action=index">Account</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Aanpassen account</li>
+                    <li class="breadcrumb-item active" aria-current="page">Aanpassen</li>
                 </ol>
             </nav>
             <h2 class="my-4">Account <?php echo $account->getUsername(); ?></h2>
@@ -145,25 +150,25 @@ function printCountryOptions($countryList, $code) {
                             <div class="form-group col-md-4">
                                 <label for="inputHousenumber">Huisnummer</label>
                                 <input name="housenumber" type="number" class="form-control" id="inputHousenumber"
-                                       placeholder=""
+                                       placeholder="Huisnummer"
                                        value="<?php echo $address->getHousenumber(); ?>" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputHousenumberAddition">Toevoeging</label>
                                 <input name="housenumberAddition" type="text" class="form-control"
-                                       id="inputHousenumberAddition" placeholder=""
+                                       id="inputHousenumberAddition" placeholder="Toegoeging"
                                        value="<?php echo $address->getHousenumberAddition(); ?>">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputZipcode">Postcode</label>
-                                <input name="zipcode" type="text" class="form-control" id="inputZipcode" placeholder=""
+                                <label for="inputPostcode">Postcode</label>
+                                <input name="postcode" type="text" class="form-control" id="inputPostcode" placeholder="Postcode"
                                        value="<?php echo $address->getPostcode(); ?>" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Stad</label>
-                                <input name="city" type="text" class="form-control" id="inputCity" placeholder=""
+                                <input name="city" type="text" class="form-control" id="inputCity" placeholder="Stad"
                                        value="<?php echo $address->getCity(); ?>" required>
                             </div>
                         </div>
@@ -171,7 +176,7 @@ function printCountryOptions($countryList, $code) {
                             <div class="form-group col-md-6">
                                 <label for="inputProvince">Provincie</label>
                                 <input name="province" type="text" class="form-control" id="inputProvince"
-                                       placeholder=""
+                                       placeholder="Provincie"
                                        value="<?php echo $address->getProvince(); ?>">
                             </div>
                             <div class="form-group col-md-6">
@@ -184,8 +189,8 @@ function printCountryOptions($countryList, $code) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputAddressType">Type adres</label>
-                            <select name="addressType" type="text" class="form-control" id="inputAddressType" required>
+                            <label for="inputTypeOfAddress">Type adres</label>
+                            <select name="typeOfAddress" type="text" class="form-control" id="inputTypeOfAddress" required>
                                 <?php
                                 if ($address->getTypeOfAddress() == 'Beide'){
                                     echo "<option>Beide</option>";
@@ -203,7 +208,7 @@ function printCountryOptions($countryList, $code) {
                                     echo "<option>Beide</option>";
                                 }
                                 else {
-                                    echo "<option></option>";
+                                    echo "<option value='' disabled selected>Selecteer type adres</option>";
                                     echo "<option>Postadres</option>";
                                     echo "<option>Afleveradres</option>";
                                     echo "<option>Beide</option>";

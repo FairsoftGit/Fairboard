@@ -175,7 +175,7 @@ function printCountryOptions($countryList, $code) {
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCountry">Land</label>
-                                <select name="country" type="text" class="form-control" id="inputCountry" required>
+                                <select name="countryCode" type="text" class="form-control" id="inputCountry" required>
                                     <?php
                                         printCountryOptions($countryList, $address->getCountryCode());
                                     ?>

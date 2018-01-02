@@ -2,7 +2,6 @@
 class Address {
     private $street;
     private $housenumber;
-    private $housenumberAddition;
     private $postcode;
     private $city;
     private $province;

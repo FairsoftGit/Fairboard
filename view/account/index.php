@@ -30,21 +30,17 @@
                     <?php foreach($accounts as $account) { ?>
                             <tr class="table-row" data-status="<?php echo $account->getStatus();?>">
                                 <td></td>
-                                <td class="relationId"><?php echo $account->getRelationId();?></td>
+                                <td class="relationId"><?php echo $account->getRelationNumber();?></td>
                                 <td class="username"><?php echo $account->getUsername();?></td>
                                 <td class="active"><?php echo ($account->getStatus() == 1 ? '<span class="badge badge-success">Actief</span>' : '<span class="badge badge-danger">Inactief</span>'); ?></td>
-                                <td><a href="?controller=account&action=edit&relationId=<?php echo $account->getRelationId();?>" data-placement="top" data-toggle="tooltip" title="Aanpassen" class="btn btn-primary btn-xs" role="button" aria-pressed="true"><span class="fa fa-pencil"></span></a></td>
+                                <td><a href="?controller=account&action=edit&relationNumber=<?php echo $account->getRelationNumber();?>" data-placement="top" data-toggle="tooltip" title="Aanpassen" class="btn btn-primary btn-xs" role="button" aria-pressed="true"><span class="fa fa-pencil"></span></a></td>
                             </tr>
-                        <script>
-                            $('#accountTable tbody').find('tr:last').hide().fadeIn();
-                        </script>
                     <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-</div>
 </main>
 <script>
     $( document ).ready(function() {

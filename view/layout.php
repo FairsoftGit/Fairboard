@@ -52,6 +52,9 @@
                     <a class="nav-link navLinkSupplier" href="#">Leveranciers</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link navLinkProduct" href="?controller=product&action=index">Producten</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link navLinkStock" href="#">Voorraad</a>
                 </li>
             </ul>

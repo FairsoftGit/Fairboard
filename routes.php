@@ -32,7 +32,7 @@ $controllers = array('pages' => ['home', 'error'],
                     'account' => ['index', 'add', 'edit', 'create', 'update'],
                     'person' => ['create', 'update'],
                     'address' => ['create', 'update'],
-                    'product' => ['index', 'create', 'update', 'delete'],);
+                    'product' => ['index', 'add', 'create', 'update', 'delete'],);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

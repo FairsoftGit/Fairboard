@@ -28,9 +28,24 @@ class Product
         $req = $db->query('SELECT * FROM product;');
 
         foreach ($req->fetchAll() as $product) {
-            $products[] = new Product($product['productId'], $product['productName'], $product['productDesc'], $product['purchasePrice'], $product['salesPrice'], $product['rentalPrice'], $product['relationNumber']);
+            $products[] = new Product($product['productId'], $product['productName'], $product['productDesc'], $product['purchasePrice'], $product['salesPrice'], $product['rentalPrice'], $product['COMPANYRELATIONrelationNumber']);
         }
         return $products;
+    }
+
+    public static function create($productName, $productDesc, $purchasePrice, $salesPrice, $rentalPrice, $relationNumber)
+    {
+        $db = DBConnection::getInstance();
+        $stmt = $db->prepare('CALL sp_createProduct(?,?,?,?,?,?)');
+        $stmt->bindParam(1, $productName,  PDO::PARAM_STR);
+        $stmt->bindParam(2, $productDesc,   PDO::PARAM_STR);
+        $stmt->bindParam(3, $purchasePrice,   PDO::PARAM_STR);
+        $stmt->bindParam(4, $salesPrice,  PDO::PARAM_STR);
+        $stmt->bindParam(5, $rentalPrice,   PDO::PARAM_STR);
+        $stmt->bindParam(6, $relationNumber,   PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['productId'];
     }
 
     public function getProductId()

@@ -3,14 +3,22 @@
 class ProductController
 {
     public function index() {
-        if (!isset($_POST['']))
-            return call('pages', 'error');
         $products = Product::all();
         require_once('view/product/index.php');
     }
 
+    public function add() {
+        require_once('model/Company.php');
+        $companies = Company::all();
+        require_once('view/product/add.php');
+    }
+
     public function create() {
-        require_once('view/product/create.php');
+        if (!isset($_POST['productName']) || !isset($_POST['relationNumber']))
+            return call('pages', 'error');
+        $productId = Product::create($_POST['productName'], $_POST['productDesc'], $_POST['purchasePrice'], $_POST['salesPrice'], $_POST['rentalPrice'], $_POST['relationNumber']);
+        header('location: ?controller=product&action=index');
+        exit();
     }
 
     public function update(){

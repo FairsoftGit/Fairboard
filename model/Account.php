@@ -35,7 +35,7 @@ class Account
         $req = $db->query('SELECT * FROM account ORDER BY username');
 
         foreach ($req->fetchAll() as $account) {
-            $accounts[] = new Account($account['username'], $account['password'], $account['status'], $account['relationId']);
+            $accounts[] = new Account($account['username'], $account['password'], $account['status'], $account['RELATIONrelationNumber']);
         }
         return $accounts;
     }
@@ -47,9 +47,9 @@ class Account
         $req = $db->prepare('CALL sp_getAccountEditData(:relationId)');
         $req->execute(array('relationId' => $relationId));
         $result = $req->fetch();
-        $account = new Account($result['username'], $result['password'], $result['status'], $result['relationId']);
-        $address = new Address($result['relationId'], $result['street'], $result['housenumber'], $result['housenumberAddition'], $result['zipcode'], $result['city'], $result['province'], $result['country'], $result['addressType'], $result['validFrom'], $result['validTo'] );
-        $person = new Person($result['firstname'], $result['lastname'], $result['middlename'], $result['gender'], $result['birthdate'], $result['relationId']);
+        $account = new Account($result['username'], $result['password'], $result['status'], $result['relationNumber']);
+        $address = new Address($result['relationNumber'], $result['street'], $result['housenumber'], $result['postcode'], $result['city'], $result['province'], $result['countryCode'], $result['typeOfAddress'] );
+        $person = new Person($result['name'], $result['lastName'], $result['middleName'], $result['gender'], $result['birthDate'], $result['relationNumber']);
         $list[] = $account;
         $list[] = $address;
         $list[] = $person;
@@ -76,7 +76,7 @@ class Account
         $status = intval($status);
         $db = DBConnection::getInstance();
         $stmt = $db->prepare('CALL sp_updateAccount(?,?,?,?)');
-        $stmt->bindParam(1, $relationId,  PDO::PARAM_INT);
+        $stmt->bindParam(1, $relationId,  PDO::PARAM_STR);
         $stmt->bindParam(2, $username,  PDO::PARAM_STR);
         $stmt->bindParam(3, $password,   PDO::PARAM_STR);
         $stmt->bindParam(4, $status,   PDO::PARAM_INT);

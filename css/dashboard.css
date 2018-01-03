@@ -65,3 +65,14 @@ h1 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+/* Color toggle buttons account */
+
+.banBtn a, .banBtn a:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.activateBtn a, .activateBtn a:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+}

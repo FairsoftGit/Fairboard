@@ -7,7 +7,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Producten</li>
                 </ol>
             </nav>
-            <h2>Products</h2>
+            <h2>Producten</h2>
             <div class="input-group my-2">
                 <span class="input-group-addon" id="search-Product-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
                 <input id="searchProductInput" type="text" class="form-control" placeholder="Zoeken" aria-label="SearchProducts" aria-describedby="search-Product-addon">

@@ -220,27 +220,32 @@ function printCountryOptions($countryList, $code) {
                 <!-- Orderhistory tab -->
                 <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
                     <div class="table-responsive">
+
+                    <?php foreach($orders as $order) { ?>
                         <table id="orderTable" class="table table-dark table-striped table-hover table-filter">
-                            <thead>
-                                <tr>
-                                    <th>Datum</th>
-                                    <th>Ordernummer</th>
-                                    <th>Productnaam</th>
-                                    <th>Serienummer</th>
-                                    <th>Prijs</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($orderlines as $orderline) { ?>
-                            <tr class="table-row" data-status="<?php echo $orderline->getOrderDate();?>">
-                                <td class="orderDate"><?php echo $orderline->getOrderDate();?></td>
-                                <td class="orderId"><?php echo $orderline->getOrderId();?></td>
+                            <caption class="accordion-toggle" data-toggle="collapse" data-target=".orderRow">Datum: <?php echo $order->getOrderDate();?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ordernummer: <?php echo $order->getOrderId();?></caption>
+                            <tr class="bg-primary accordion-toggle orderRow" data-toggle="collapse" data-target=".orderRow">
+                                <th>Productnaam</th>
+                                <th>Serienummer</th>
+                                <th>Prijs</th>
+                            </tr>
+
+                            <?php foreach($orderlines as $orderline) {
+                                if($order->getOrderId() == $orderline->getOrderId()) {
+                            ?>
+
+                            <tr class="table-row orderRow" data-status="">
                                 <td class="productName"><?php echo $orderline->getProductName();?></td>
                                 <td class="serialNumber"><?php echo $orderline->getSerialNumber();?></td>
                                 <td class="salesPrice"><?php echo $orderline->getSalesPrice();?></td>
-                            <?php } ?>
-                            </tbody>
+                            </tr>
+
+                            <?php }} ?>
                         </table>
+                        <hr>
+                    <?php } ?>
+
+
                     </div>
                 </div>
                 <!-- ## Orderhistory tab -->

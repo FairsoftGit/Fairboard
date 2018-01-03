@@ -15,6 +15,7 @@ class AccountController
         require_once 'model/Person.php';
         require_once 'model/Address.php';
         require_once 'model/Country.php';
+        require_once 'model/Orderline.php';
 
         if (!isset($_GET['relationNumber']))
             return call('pages', 'error');
@@ -27,6 +28,7 @@ class AccountController
             return call('pages', 'error');
         }
         $countryList = Country::all();
+        $orderlines = Orderline::all($_GET['relationNumber']);
         require_once('view/account/edit.php');
     }
 

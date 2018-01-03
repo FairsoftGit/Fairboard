@@ -44,6 +44,8 @@ function printCountryOptions($countryList, $code) {
                    aria-controls="nav-person" aria-selected="false">Persoonsgegevens</a>
                 <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab"
                    aria-controls="nav-address" aria-selected="false">Adres</a>
+                <a class="nav-item nav-link" id="nav-order-tab" data-toggle="tab" href="#nav-order" role="tab"
+                   aria-controls="nav-order" aria-selected="false">Bestelhistorie</a>
             </nav>
             <!--##Account tab-->
             <div class="tab-content" id="nav-tabContent">
@@ -212,7 +214,36 @@ function printCountryOptions($countryList, $code) {
                         </div>
                             <button type="submit" class="btn btn-primary">Opslaan</button>
                     </form>
-                </div> <!-- Address tab-->
+                </div> <!-- ##Address tab-->
+
+
+                <!-- Orderhistory tab -->
+                <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
+                    <div class="table-responsive">
+                        <table id="orderTable" class="table table-dark table-striped table-hover table-filter">
+                            <thead>
+                                <tr>
+                                    <th>Datum</th>
+                                    <th>Ordernummer</th>
+                                    <th>Productnaam</th>
+                                    <th>Serienummer</th>
+                                    <th>Prijs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($orderlines as $orderline) { ?>
+                            <tr class="table-row" data-status="<?php echo $orderline->getOrderDate();?>">
+                                <td class="orderDate"><?php echo $orderline->getOrderDate();?></td>
+                                <td class="orderId"><?php echo $orderline->getOrderId();?></td>
+                                <td class="productName"><?php echo $orderline->getProductName();?></td>
+                                <td class="serialNumber"><?php echo $orderline->getSerialNumber();?></td>
+                                <td class="salesPrice"><?php echo $orderline->getSalesPrice();?></td>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- ## Orderhistory tab -->
             </div>
         </div>
     </div>

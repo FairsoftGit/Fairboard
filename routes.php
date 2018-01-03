@@ -23,8 +23,8 @@ function call($controller, $action) {
             $controller = new ProductController();
             break;
         case 'order':
-            require_once ('model/Order.php');
-            $controller = new OrderController();
+            require_once ('model/Orderline.php');
+            $controller = new OrderlineController();
             break;
 
     }
@@ -37,7 +37,7 @@ $controllers = array('pages' => ['home', 'error'],
                     'person' => ['create', 'update'],
                     'address' => ['create', 'update'],
                     'product' => ['index', 'add', 'create', 'update', 'delete'],
-                    'product' => ['index']);
+                    'orderline' => ['index']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

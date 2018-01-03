@@ -1,9 +1,9 @@
 <?php
 
-class OrderController
+class OrderlineController
 {
     public function index() {
-        $orderlines = Order::all();
+        $orderlines = Orderline::all();
         require_once('view/account/edit.php');
     }
 }

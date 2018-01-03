@@ -46,7 +46,13 @@ class AccountController
             return call('pages', 'error');
 
         $relationId  = Account::create($_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));
-        header('location: ?controller=account&action=edit&relationNumber='.$relationId);
-        exit();
+        if($relationId == 0)
+        {
+
+        }
+        else{
+            header('location: ?controller=account&action=edit&relationNumber='.$relationId);
+            exit();
+        }
     }
 }

@@ -1,5 +1,4 @@
-<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-    <div class="row">
+<div class="row">
         <div class="col-md-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -40,10 +39,9 @@
             </div>
         </div>
     </div>
-</main>
 <script>
     $( document ).ready(function() {
-        $('.navLinkProducts').addClass('active');
+        $('.navLinkProduct').addClass('active');
 
         document.querySelector('#searchProductInput').addEventListener('keyup', filterProductTable, false);
 

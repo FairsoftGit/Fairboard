@@ -5,74 +5,72 @@
   background-color: rgba(246, 160, 23, 0.8);
 }
 
-/* Move down content because we have a fixed navbar that is 3.5rem tall */
-body {
-  padding-top: 3.5rem;
-}
-
-/*
- * Typography
- */
-
-h1 {
-  padding-bottom: 9px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #eee;
-}
-
-/*
- * Sidebar
- */
-
-.sidebar {
-  position: fixed;
-  top: 51px;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  padding: 20px 0;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  border-right: 1px solid #eee;
-}
-
-.sidebar .nav {
-  margin-bottom: 20px;
-}
-
-.sidebar .nav-item {
-  width: 100%;
-}
-
-.sidebar .nav-item + .nav-item {
+#body-row {
   margin-left: 0;
+  margin-right: 0;
 }
 
-.sidebar .nav-link {
-  border-radius: 0;
+#sidebar-container {
+  min-height: 100vh;
+  background-color: #333;
+  padding: 0;
 }
 
-/*
- * Dashboard
- */
-
-/* Placeholders */
-.placeholders {
-  padding-bottom: 3rem;
+/* Sidebar sizes when expanded and expanded */
+.sidebar-expanded {
+  width: 230px;
 }
 
-.placeholder img {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-/* Color toggle buttons account */
-
-.banBtn a, .banBtn a:hover {
-  background-color: #dc3545;
-  border-color: #dc3545;
+.sidebar-collapsed {
+  width: 60px;
 }
 
-.activateBtn a, .activateBtn a:hover {
-  background-color: #28a745;
-  border-color: #28a745;
+/* Menu item*/
+#sidebar-container .list-group a {
+  height: 50px;
+  color: white;
+}
+
+/* Submenu item*/
+#sidebar-container .list-group .sidebar-submenu a {
+  height: 45px;
+  padding-left: 30px;
+}
+
+.sidebar-submenu {
+  font-size: 0.9rem;
+}
+
+/* Separators */
+.sidebar-separator-title {
+  background-color: #333;
+  height: 35px;
+}
+
+.sidebar-separator {
+  background-color: #333;
+  height: 25px;
+}
+
+.logo-separator {
+  background-color: #333;
+  height: 60px;
+}
+
+/* Closed submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+  content: " \f0d7";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 10px;
+}
+
+/* Opened submenu icon */
+#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+  content: " \f0da";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 10px;
 }

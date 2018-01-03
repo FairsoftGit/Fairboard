@@ -225,7 +225,7 @@ function printCountryOptions($countryList, $code) {
                                 <tr>
                                     <th>Datum</th>
                                     <th>Ordernummer</th>
-                                    <th>Productnaame</th>
+                                    <th>Productnaam</th>
                                     <th>Serienummer</th>
                                     <th>Prijs</th>
                                 </tr>

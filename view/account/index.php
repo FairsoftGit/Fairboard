@@ -32,13 +32,6 @@
                         <td class="relationId"><?php echo $account->getRelationNumber();?></td>
                         <td class="username"><?php echo $account->getUsername();?></td>
                         <td class="active"><?php echo ($account->getStatus() == 1 ? '<span class="badge badge-success">Actief</span>' : '<span class="badge badge-danger">Inactief</span>'); ?></td>
-                        <td class="status <?php echo ($account->getStatus() == 1 ? 'banBtn' : 'activateBtn'); ?>">
-                            <a href="?controller=account&action=changeStatus&relationNumber=<?php echo $account->getRelationNumber();?>" data-placement="top" data-toggle="tooltip" title="Activeren/Schorsen" class="btn btn-primary btn-xs" role="button" aria-pressed="true">
-                                <?php
-                                echo ($account->getStatus() == 1 ? '<span class="fa fa-ban"></span>' : '<span class="fa fa-check"></span>');
-                                ?>
-                            </a>
-                        </td>
                         <td class="updateBtn">
                             <a href="?controller=account&action=edit&relationNumber=<?php echo $account->getRelationNumber();?>" data-placement="top" data-toggle="tooltip" title="Aanpassen" class="btn btn-primary btn-xs" role="button" aria-pressed="true">
                                 <span class="fa fa-pencil"></span>

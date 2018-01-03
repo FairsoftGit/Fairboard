@@ -1,11 +1,9 @@
-<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-    <h1>Home</h1>
+<h1>Home</h1>
     <section class="row text-center placeholders">
         <div class="col-6 col-sm-3 placeholder">
             <div id="char_account_status"></div>
         </div>
     </section>
-</main>
 <script>
     $( document ).ready(function() {
         $('.navLinkFairboard').addClass('active');

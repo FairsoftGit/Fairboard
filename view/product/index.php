@@ -1,5 +1,4 @@
-<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-    <div class="row">
+<div class="row">
         <div class="col-md-12">
             <nav aria-label="breadcrumb" role="navigation">
                 <ol class="breadcrumb">
@@ -7,7 +6,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Producten</li>
                 </ol>
             </nav>
-            <h2>Products</h2>
+            <h2>Producten</h2>
             <div class="input-group my-2">
                 <span class="input-group-addon" id="search-Product-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
                 <input id="searchProductInput" type="text" class="form-control" placeholder="Zoeken" aria-label="SearchProducts" aria-describedby="search-Product-addon">
@@ -40,10 +39,9 @@
             </div>
         </div>
     </div>
-</main>
 <script>
     $( document ).ready(function() {
-        $('.navLinkProducts').addClass('active');
+        $('.navLinkProduct').addClass('active');
 
         document.querySelector('#searchProductInput').addEventListener('keyup', filterProductTable, false);
 

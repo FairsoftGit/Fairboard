@@ -59,15 +59,25 @@ class Account
 
     public static function create($username, $password, $status)
     {
-        $status = intval($status);
-        $db = DBConnection::getInstance();
-        $stmt = $db->prepare('CALL sp_createAccount(?,?,?)');
-        $stmt->bindParam(1, $username,  PDO::PARAM_STR);
-        $stmt->bindParam(2, $password,   PDO::PARAM_STR);
-        $stmt->bindParam(3, $status,   PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetch();
-        return $result['RELATIONrelationNumber'];
+        try {
+            $status = intval($status);
+            $db = DBConnection::getInstance();
+            $stmt = $db->prepare('CALL sp_createAccount(?,?,?)');
+            $stmt->bindParam(1, $username,  PDO::PARAM_STR);
+            $stmt->bindParam(2, $password,   PDO::PARAM_STR);
+            $stmt->bindParam(3, $status,   PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result['RELATIONrelationNumber'];
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                // duplicate entry, do something else
+                return 0;
+            } else {
+                // an error other than duplicate entry occurred
+            }
+        }
+
     }
 
     public static function update($relationNumber, $username, $password, $status)

@@ -22,6 +22,10 @@ function call($controller, $action) {
             require_once ('model/Product.php');
             $controller = new ProductController();
             break;
+        case 'order':
+            require_once ('model/Order.php');
+            $controller = new OrderController();
+            break;
 
     }
     $controller->{ $action }();
@@ -32,7 +36,8 @@ $controllers = array('pages' => ['home', 'error'],
                     'account' => ['index', 'add', 'edit', 'create', 'update'],
                     'person' => ['create', 'update'],
                     'address' => ['create', 'update'],
-                    'product' => ['index', 'add', 'create', 'update', 'delete'],);
+                    'product' => ['index', 'add', 'create', 'update', 'delete'],
+                    'product' => ['index']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

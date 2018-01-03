@@ -215,8 +215,32 @@ function printCountryOptions($countryList, $code) {
                             <button type="submit" class="btn btn-primary">Opslaan</button>
                     </form>
                 </div> <!-- ##Address tab-->
+
+
                 <!-- Orderhistory tab -->
                 <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
+                    <div class="table-responsive">
+                        <table id="orderTable" class="table table-dark table-striped table-hover table-filter">
+                            <thead>
+                                <tr>
+                                    <th>Datum</th>
+                                    <th>Ordernummer</th>
+                                    <th>Productnaame</th>
+                                    <th>Serienummer</th>
+                                    <th>Prijs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($orderlines as $orderline) { ?>
+                            <tr class="table-row" data-status="<?php echo $orderline->getOrderDate();?>">
+                                <td class="orderDate"><?php echo $orderline->getOrderId();?></td>
+                                <td class="orderId"><?php echo $orderline->getProductName();?></td>
+                                <td class="orderDate"><?php echo $orderline->getSerialNumber();?></td>
+                                <td class="orderId"><?php echo $orderline->getSalesPrice();?></td>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!-- ## Orderhistory tab -->
             </div>

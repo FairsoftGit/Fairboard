@@ -1,5 +1,4 @@
 <?php
-
 class Orderline
 {
     private $orderDate;
@@ -19,15 +18,17 @@ class Orderline
         $this->relationNumber = $relationNumber;
     }
 
-    public static function all()
+    public static function all($relationNumber)
     {
         $orderlines = [];
         $db = DBConnection::getInstance();
-        $req = $db->query('CALL sp_getOrderHistory(?)');
-
-        foreach ($req->fetchall() as $orderline) {
+        $stmt = $db->prepare('CALL sp_getOrderHistory(?)');
+        $stmt->bindParam(1, $relationNumber,  PDO::PARAM_STR);
+        $stmt->execute();
+        foreach ($stmt->fetchall() as $orderline) {
             $orderlines[] = new Orderline($orderline['orderDate'], $orderline['orderId'], $orderline['productName'], $orderline['serialNumber'], $orderline['salesPrice'], $orderline['RELATIONrelationNumber']);
         }
+
         return $orderlines;
     }
 

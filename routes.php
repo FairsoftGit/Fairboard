@@ -22,6 +22,10 @@ function call($controller, $action) {
             require_once ('model/Product.php');
             $controller = new ProductController();
             break;
+        case 'orderline':
+            require_once ('model/Orderline.php');
+            $controller = new OrderlineController();
+            break;
         case 'order':
             require_once ('model/Orderline.php');
             $controller = new OrderlineController();

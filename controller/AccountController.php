@@ -29,6 +29,7 @@ class AccountController
         }
         $countryList = Country::all();
         $orderlines = Orderline::all($_GET['relationNumber']);
+        $orders = Order::onlyOrders($_GET['relationNumber']);
         require_once('view/account/edit.php');
     }
 

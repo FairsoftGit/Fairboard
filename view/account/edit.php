@@ -233,10 +233,11 @@ function printCountryOptions($countryList, $code) {
                             <tbody>
                             <?php foreach($orderlines as $orderline) { ?>
                             <tr class="table-row" data-status="<?php echo $orderline->getOrderDate();?>">
-                                <td class="orderDate"><?php echo $orderline->getOrderId();?></td>
-                                <td class="orderId"><?php echo $orderline->getProductName();?></td>
-                                <td class="orderDate"><?php echo $orderline->getSerialNumber();?></td>
-                                <td class="orderId"><?php echo $orderline->getSalesPrice();?></td>
+                                <td class="orderDate"><?php echo $orderline->getOrderDate();?></td>
+                                <td class="orderId"><?php echo $orderline->getOrderId();?></td>
+                                <td class="productName"><?php echo $orderline->getProductName();?></td>
+                                <td class="serialNumber"><?php echo $orderline->getSerialNumber();?></td>
+                                <td class="salesPrice"><?php echo $orderline->getSalesPrice();?></td>
                             <?php } ?>
                             </tbody>
                         </table>

@@ -34,7 +34,8 @@ class Orderline
 
     public function getOrderDate()
     {
-        return $this->orderDate;
+        $date = $this->orderDate;
+        return date("d-m-Y", strtotime($date));
     }
 
     public function getOrderId()

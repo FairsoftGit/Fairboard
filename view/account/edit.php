@@ -44,6 +44,8 @@ function printCountryOptions($countryList, $code) {
                    aria-controls="nav-person" aria-selected="false">Persoonsgegevens</a>
                 <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab"
                    aria-controls="nav-address" aria-selected="false">Adres</a>
+                <a class="nav-item nav-link" id="nav-order-tab" data-toggle="tab" href="#nav-order" role="tab"
+                   aria-controls="nav-order" aria-selected="false">Bestelhistorie</a>
             </nav>
             <!--##Account tab-->
             <div class="tab-content" id="nav-tabContent">
@@ -212,7 +214,11 @@ function printCountryOptions($countryList, $code) {
                         </div>
                             <button type="submit" class="btn btn-primary">Opslaan</button>
                     </form>
-                </div> <!-- Address tab-->
+                </div> <!-- ##Address tab-->
+                <!-- Orderhistory tab -->
+                <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
+                </div>
+                <!-- ## Orderhistory tab -->
             </div>
         </div>
     </div>

@@ -42,7 +42,7 @@ $controllers = array('Pages' => ['home', 'error'],
                     'Account' => ['index', 'add', 'edit', 'create', 'update', 'toggleStatus'],
                     'Person' => ['create', 'update'],
                     'Address' => ['create', 'update'],
-                    'Product' => ['index', 'add', 'create', 'update', 'delete'],
+                    'Product' => ['index', 'add', 'create', 'update', 'delete', 'edit'],
                     'Orderline' => ['index']);
 
 if (array_key_exists($controller, $controllers)) {

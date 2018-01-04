@@ -77,7 +77,6 @@ class Account
                 // an error other than duplicate entry occurred
             }
         }
-
     }
 
     public static function toggleStatus($username, $status){

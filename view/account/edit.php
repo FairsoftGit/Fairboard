@@ -25,7 +25,6 @@ function printCountryOptions($countryList, $code)
         }
     }
 }
-
 ?>
 <div class="col-md-12">
     <nav aria-label="breadcrumb" role="navigation">

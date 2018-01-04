@@ -42,6 +42,17 @@ class AccountController
         exit();
     }
 
+    public function toggleStatus(){
+        if(!isset($_GET['username']) || !isset($_GET['status'])){
+            return call ('pages', 'error');
+        }
+        $status = $_GET['status'];
+        ($status == 0 ? $status = 1 : $status = 0);
+        Account::toggleStatus($_GET['username'], $status);
+        header('location: ?controller=account&action=index');
+        exit();
+    }
+
     public function create() {
         if (!isset($_POST['username']) || !isset($_POST['password']))
             return call('pages', 'error');

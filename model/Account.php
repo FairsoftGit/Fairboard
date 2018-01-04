@@ -80,6 +80,15 @@ class Account
 
     }
 
+    public static function toggleStatus($username, $status){
+        $status = intval($status);
+        $db = DBConnection::getInstance();
+        $stmt = $db->prepare('CALL sp_toggleStatus(?,?)');
+        $stmt->bindParam(1, $username,  PDO::PARAM_STR);
+        $stmt->bindParam(2, $status,  PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
     public static function update($relationNumber, $username, $password, $status)
     {
         $status = intval($status);

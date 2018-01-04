@@ -37,7 +37,7 @@ function call($controller, $action) {
 
 // Add available actions for the controller
 $controllers = array('pages' => ['home', 'error'],
-                    'account' => ['index', 'add', 'edit', 'create', 'update'],
+                    'account' => ['index', 'add', 'edit', 'create', 'update', 'toggleStatus'],
                     'person' => ['create', 'update'],
                     'address' => ['create', 'update'],
                     'product' => ['index', 'add', 'create', 'update', 'delete'],

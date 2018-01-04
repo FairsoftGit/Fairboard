@@ -27,7 +27,7 @@ function printCompanyOptions($companies)
         </div>
         <div class="form-group">
             <label for="inputProductDesc">Beschrijving</label>
-            <textarea placeholder="Beschrijving" class="form-control" id="inputProductDesc" rows="4"></textarea>
+            <textarea name="productDesc" placeholder="Beschrijving" class="form-control" id="inputProductDesc" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="inputPurchasePrice">Inkoopprijs</label>

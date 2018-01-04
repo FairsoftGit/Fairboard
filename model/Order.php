@@ -29,7 +29,6 @@ class Order
         foreach ($stmt->fetchall() as $order) {
             $orders[] = new Order($order['orderDate'], $order['orderId'], $order['RELATIONrelationNumber']);
         }
-
         return $orders;
     }
 

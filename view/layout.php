@@ -25,14 +25,14 @@
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="\Fairboard">
+    <a class="navbar-brand" href="\fairboard">
         <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30"
              class="d-inline-block align-top" alt="">
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="\Fairboard">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="\fairboard">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown d-sm-block d-md-none">
                 <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown"
@@ -40,8 +40,8 @@
                     Menu
                 </a>
                 <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
-                    <a class="dropdown-item" href="?controller=account&action=index">Accounts</a>
-                    <a class="dropdown-item" href="?controller=product&action=index">Producten</a>
+                    <a class="dropdown-item" href="?controller=Account&action=index">Accounts</a>
+                    <a class="dropdown-item" href="?controller=Product&action=index">Producten</a>
                 </div>
             </li>
 
@@ -60,10 +60,10 @@
                 </div>
             </a>
             <div id='submenu1' class="collapse sidebar-submenu">
-                <a href="?controller=account&action=index" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="?controller=Account&action=index" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Accounts</span>
                 </a>
-                <a href="?controller=product&action=index" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="?controller=Product&action=index" class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Producten</span>
                 </a>
             </div>

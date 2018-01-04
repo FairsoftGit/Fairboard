@@ -1,32 +1,34 @@
 <?php
 function call($controller, $action) {
-    require_once('controller/' . $controller . 'controller.php');
+    $realpath = realpath ($_SERVER['DOCUMENT_ROOT'].'/fairboard/controller/' . $controller . 'Controller.php');
+    $realpath = str_replace ("//", "/", $realpath);
+    require_once $realpath;
 
     switch($controller) {
-        case 'pages':
+        case 'Pages':
             $controller = new PagesController();
             break;
-        case 'account':
+        case 'Account':
             require_once('model/Account.php');
             $controller = new AccountController();
             break;
-        case 'person':
+        case 'Person':
             require_once('model/Person.php');
             $controller = new PersonController();
             break;
-        case 'address':
+        case 'Address':
             require_once('model/Address.php');
             $controller = new AddressController();
             break;
-        case 'product':
+        case 'Product':
             require_once ('model/Product.php');
             $controller = new ProductController();
             break;
-        case 'orderline':
+        case 'Orderline':
             require_once ('model/Orderline.php');
             $controller = new OrderlineController();
             break;
-        case 'order':
+        case 'Order':
             require_once ('model/Orderline.php');
             $controller = new OrderlineController();
             break;
@@ -36,20 +38,20 @@ function call($controller, $action) {
 }
 
 // Add available actions for the controller
-$controllers = array('pages' => ['home', 'error'],
-                    'account' => ['index', 'add', 'edit', 'create', 'update', 'toggleStatus'],
-                    'person' => ['create', 'update'],
-                    'address' => ['create', 'update'],
-                    'product' => ['index', 'add', 'create', 'update', 'delete'],
-                    'orderline' => ['index']);
+$controllers = array('Pages' => ['home', 'error'],
+                    'Account' => ['index', 'add', 'edit', 'create', 'update', 'toggleStatus'],
+                    'Person' => ['create', 'update'],
+                    'Address' => ['create', 'update'],
+                    'Product' => ['index', 'add', 'create', 'update', 'delete'],
+                    'Orderline' => ['index']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {
         call($controller, $action);
     } else {
-        call('pages', 'error');
+        call('Pages', 'error');
     }
 } else {
-    call('pages', 'error');
+    call('Pages', 'error');
 }
 ?>

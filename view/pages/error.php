@@ -1,2 +1,1 @@
-
-    <h1>Foutpagina</h1>
+<h1>Foutpagina</h1>

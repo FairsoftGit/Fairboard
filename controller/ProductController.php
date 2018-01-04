@@ -15,9 +15,9 @@ class ProductController
 
     public function create() {
         if (!isset($_POST['productName']) || !isset($_POST['relationNumber']))
-            return call('pages', 'error');
+            return call('Pages', 'error');
         $productId = Product::create($_POST['productName'], $_POST['productDesc'], $_POST['purchasePrice'], $_POST['salesPrice'], $_POST['rentalPrice'], $_POST['relationNumber']);
-        header('location: ?controller=product&action=index');
+        header('location: ?controller=Product&action=index');
         exit();
     }
 

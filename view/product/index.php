@@ -1,46 +1,49 @@
-<div class="row">
-        <div class="col-md-12">
-            <nav aria-label="breadcrumb" role="navigation">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="\Fairboard">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Producten</li>
-                </ol>
-            </nav>
-            <h2>Producten</h2>
-            <div class="input-group my-2">
-                <span class="input-group-addon" id="search-Product-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                <input id="searchProductInput" type="text" class="form-control" placeholder="Zoeken" aria-label="SearchProducts" aria-describedby="search-Product-addon">
-            </div>
-            <div class="table-responsive">
-                <table id="productTable" class="table table-dark table-striped table-hover table-filter">
-                    <thead>
-                    <tr>
-                        <th><a href="?controller=product&action=add" data-placement="top" data-toggle="tooltip" title="Toevoegen" class="btn btn-success btn-xs" role="button" aria-pressed="true"><span class="fa fa-plus"></span></a></th>
-                        <th>Naam</th>
-                        <th>Inkoopprijs</th>
-                        <th>Verkoopprijs</th>
-                        <th>Verhuurprijs</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($products as $product) { ?>
-                            <tr class="table-row">
-                                <td></td>
-                                <td class="productName"><?php echo $product->getProductName();?></td>
-                                <td class="purchasePrice"><?php echo $product->getPurchasePrice() ?></td>
-                                <td class="salesPrice"><?php echo $product->getSalesPrice()?></td>
-                                <td class="rentalPrice"><?php echo $product->getRentalPrice() ?></td>
-                                <td><a href="?controller=product&action=edit&productId=<?php echo $product->getProductId();?>" data-placement="top" data-toggle="tooltip" title="Aanpassen" class="btn btn-primary btn-xs" role="button" aria-pressed="true"><span class="fa fa-pencil"></span></a></td>
-                            </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<div class="col-md-12">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="\fairboard">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Producten</li>
+        </ol>
+    </nav>
+    <h2>Producten</h2>
+    <div class="input-group my-2">
+        <span class="input-group-addon" id="search-Product-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+        <input id="searchProductInput" type="text" class="form-control" placeholder="Zoeken" aria-label="SearchProducts"
+               aria-describedby="search-Product-addon">
     </div>
+    <div class="table-responsive">
+        <table id="productTable" class="table table-dark table-striped table-hover table-filter">
+            <thead>
+            <tr>
+                <th><a href="?controller=Product&action=add" data-placement="top" data-toggle="tooltip"
+                       title="Toevoegen" class="btn btn-success btn-xs" role="button" aria-pressed="true"><span
+                                class="fa fa-plus"></span></a></th>
+                <th>Naam</th>
+                <th>Inkoopprijs</th>
+                <th>Verkoopprijs</th>
+                <th>Verhuurprijs</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($products as $product) { ?>
+                <tr class="table-row">
+                    <td></td>
+                    <td class="productName"><?php echo $product->getProductName(); ?></td>
+                    <td class="purchasePrice"><?php echo $product->getPurchasePrice() ?></td>
+                    <td class="salesPrice"><?php echo $product->getSalesPrice() ?></td>
+                    <td class="rentalPrice"><?php echo $product->getRentalPrice() ?></td>
+                    <td><a href="?controller=Product&action=edit&productId=<?php echo $product->getProductId(); ?>"
+                           data-placement="top" data-toggle="tooltip" title="Aanpassen" class="btn btn-primary btn-xs"
+                           role="button" aria-pressed="true"><span class="fa fa-pencil"></span></a></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script>
-    $( document ).ready(function() {
+    $(document).ready(function () {
         $('.navLinkProduct').addClass('active');
 
         document.querySelector('#searchProductInput').addEventListener('keyup', filterProductTable, false);

@@ -35,7 +35,6 @@ function printCountryOptions($countryList, $code)
     </ol>
 </nav>
 <h2>Account <?php echo $account->getUsername(); ?></h2>
-<div class="scrollable-content">
 <nav class="nav nav-tabs" id="account-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-account-tab" data-toggle="tab" href="#nav-account"
        role="tab" aria-controls="nav-account" aria-selected="true">Account</a>
@@ -43,9 +42,12 @@ function printCountryOptions($countryList, $code)
        aria-controls="nav-person" aria-selected="false">Persoonsgegevens</a>
     <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab"
        aria-controls="nav-address" aria-selected="false">Adres</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+       aria-controls="nav-contact" aria-selected="false">Contact</a>
     <a class="nav-item nav-link" id="nav-order-tab" data-toggle="tab" href="#nav-order" role="tab"
        aria-controls="nav-order" aria-selected="false">Bestelhistorie</a>
 </nav>
+<div class="scrollable-content">
 <!--##Account tab-->
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-account" role="tabpanel"
@@ -210,8 +212,26 @@ function printCountryOptions($countryList, $code)
             <button type="submit" class="btn btn-primary">Opslaan</button>
         </form>
     </div> <!-- ##Address tab-->
-
-
+    <!--##Contact tab-->
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <form id="contact-form" class="my-4 col-md-12" action="?controller=Contact&action=update"
+              method="POST">
+            <input name="relationNumber" type="hidden" class="form-control"
+                   value="<?php echo $account->getRelationNumber(); ?>">
+            <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input name="emailAddress" type="email" class="form-control" id="inputEmail" placeholder="Email adres"
+                       value="<?php echo $email->getEmailAddress();?>" required>
+            </div>
+            <div class="form-group">
+                <label for="inputPhone">Telefoonnummer</label>
+                <input name="phoneNumber" type="tel" class="form-control" id="inputPhone"
+                       placeholder="Telefoonnummer"
+                       value="<?php echo $phone->getPhoneNumber();?>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+        </form>
+    </div> <!--##Contact tab-->
     <!-- Orderhistory tab -->
     <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
         <div class="table-responsive">

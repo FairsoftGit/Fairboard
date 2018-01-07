@@ -17,6 +17,8 @@ class AccountController
         require_once 'model/Country.php';
         require_once 'model/Order.php';
         require_once 'model/Orderline.php';
+        require_once 'model/Email.php';
+        require_once 'model/Phone.php';
 
         if (!isset($_GET['relationNumber']))
             return call('Pages', 'error');
@@ -24,6 +26,8 @@ class AccountController
         $account = $list[0];
         $address = $list[1];
         $person = $list[2];
+        $email = $list[3];
+        $phone = $list[4];
 
         if($account->getRelationNumber() == null){
             return call('Pages', 'error');

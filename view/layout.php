@@ -7,7 +7,7 @@
     <meta name="author" content="">
 
     <title>Fairboard</title>
-
+    <link rel="shortcut icon" href="/fairboard/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -19,15 +19,17 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="\fairboard">
-        <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30"
+        <img src="/fairboard/favicon.ico" width="30" height="30"
              class="d-inline-block align-top" alt="">
+        <!-- <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30"
+              class="d-inline-block align-top" alt="">-->
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
@@ -60,18 +62,19 @@
                 </div>
             </a>
             <div id='submenu1' class="collapse sidebar-submenu">
-                <a href="?controller=Account&action=index" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="?controller=Account&action=index"
+                   class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Accounts</span>
                 </a>
-                <a href="?controller=Product&action=index" class="list-group-item list-group-item-action bg-dark text-white">
+                <a href="?controller=Product&action=index"
+                   class="list-group-item list-group-item-action bg-dark text-white">
                     <span class="menu-collapsed">Producten</span>
                 </a>
             </div>
         </ul><!-- List Group END-->
     </div><!-- sidebar-container END -->
-
     <!-- MAIN -->
-    <div class="col my-2">
+    <div class="col mt-2">
         <?php require_once('routes.php'); ?>
     </div>
 </div><!-- body-row END -->

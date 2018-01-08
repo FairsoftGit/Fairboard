@@ -32,10 +32,9 @@ function call($controller, $action) {
             require_once ('model/Orderline.php');
             $controller = new OrderlineController();
             break;
-        case 'Contact':
-            require_once ('model/Phone.php');
-            require_once ('model/Email.php');
-            $controller = new ContactController();
+        case 'Relation':
+            require_once ('model/Relation.php');
+            $controller = new RelationController();
             break;
 
     }
@@ -49,7 +48,7 @@ $controllers = array('Pages' => ['home', 'error'],
                     'Address' => ['create', 'update'],
                     'Product' => ['index', 'add', 'create', 'update', 'delete', 'edit'],
                     'Orderline' => ['index'],
-                    'Contact' => ['update']);
+                    'Relation' => ['save']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

@@ -50,13 +50,11 @@ class Account
         $account = new Account($result['username'], $result['password'], $result['status'], $result['relationNumber']);
         $address = new Address($result['street'], $result['housenumber'],  $result['postcode'], $result['city'], $result['province'], $result['countryCode'], $result['typeOfAddress'] );
         $person = new Person($result['firstName'], $result['lastName'], $result['middleName'], $result['gender'], $result['birthDate'], $result['relationNumber']);
-        $email = new Email($result['emailAddress'], $result['relationNumber']);
-        $phone = new Phone($result['phonenumber'], $result['relationNumber']);
+        $relation = new Relation($result['relationNumber'], $result['relationType'], $result['isActive'], $result['emailAddress'], $result['phoneNumber']);
         $list[] = $account;
         $list[] = $address;
         $list[] = $person;
-        $list[] = $email;
-        $list[] = $phone;
+        $list[] = $relation;
         return $list;
 
     }

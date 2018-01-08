@@ -17,8 +17,7 @@ class AccountController
         require_once 'model/Country.php';
         require_once 'model/Order.php';
         require_once 'model/Orderline.php';
-        require_once 'model/Email.php';
-        require_once 'model/Phone.php';
+        require_once 'model/Relation.php';
 
         if (!isset($_GET['relationNumber']))
             return call('Pages', 'error');
@@ -26,8 +25,7 @@ class AccountController
         $account = $list[0];
         $address = $list[1];
         $person = $list[2];
-        $email = $list[3];
-        $phone = $list[4];
+        $relation = $list[3];
 
         if($account->getRelationNumber() == null){
             return call('Pages', 'error');
@@ -39,7 +37,7 @@ class AccountController
     }
 
     public function update() {
-        if (!isset($_POST['relationNumber']) || !isset($_POST['username']) || !isset($_POST['password']))
+        if (!isset($_POST['relationNumber']) || !isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['emailAddress']))
             return call('Pages', 'error');
 
         Account::update($_POST['relationNumber'], $_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));

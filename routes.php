@@ -48,7 +48,7 @@ $controllers = array('Pages' => ['home', 'error'],
                     'Address' => ['create', 'update'],
                     'Product' => ['index', 'add', 'create', 'update', 'delete', 'edit'],
                     'Orderline' => ['index'],
-                    'Relation' => ['save']);
+                    'Relation' => ['update']);
 
 if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

@@ -30,6 +30,7 @@ class AccountController
         if($account->getRelationNumber() == null){
             return call('Pages', 'error');
         }
+        $relationTypes = Relation::getAllRelationTypes();
         $countryList = Country::all();
         $orderlines = Orderline::all($_GET['relationNumber']);
         $orders = Order::onlyOrders($_GET['relationNumber']);
@@ -37,7 +38,7 @@ class AccountController
     }
 
     public function update() {
-        if (!isset($_POST['relationNumber']) || !isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['emailAddress']))
+        if (!isset($_POST['relationNumber']) || !isset($_POST['username']) || !isset($_POST['password']))
             return call('Pages', 'error');
 
         Account::update($_POST['relationNumber'], $_POST['username'], $_POST['password'], (isset($_POST['status']) == true ? 1 : 0));

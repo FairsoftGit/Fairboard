@@ -25,7 +25,32 @@ function printCountryOptions($countryList, $code)
         }
     }
 }
+function printRelationTypeOptions($relationTypes, $currentValue)
+{
+    $newArray = [];
+    foreach ($relationTypes as $type) {
+        if ($currentValue == $type) {
+            $newArray[] = $type;
+            break;
+        }
+    }
+    if (empty($newArray)) {
+        echo "<option value='' disabled selected>Selecteer type</option>";
+    }
 
+    foreach ($relationTypes as $type) {
+        if ($currentValue != $type) {
+            $newArray[] = $type;
+        }
+    }
+    foreach ($newArray as $type) {
+        if ($type == '') {
+            echo "<option value='' disabled selected>Selecteer type</option>";
+        } else {
+            echo "<option>" . $type . "</option>";
+        }
+    }
+}
 ?>
 <nav aria-label="breadcrumb" role="navigation">
     <ol class="breadcrumb">
@@ -52,7 +77,7 @@ function printCountryOptions($countryList, $code)
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-relation" role="tabpanel"
              aria-labelledby="nav-relation-tab">
-            <form id="relation-form" class="my-4 col-md-12" action="?controller=Relation&action=save"
+            <form id="relation-form" class="my-4 col-md-12" action="?controller=Relation&action=update"
                   method="POST">
                 <div class="form-check">
                     <label class="form-check-label">
@@ -69,9 +94,11 @@ function printCountryOptions($countryList, $code)
                 </div>
                 <div class="form-group">
                     <label for="inputRelationType">Type</label>
-                    <input name="relationType" type="text" class="form-control" id="inputRelationType"
-                           placeholder="Type relatie"
-                           value="<?php echo $relation->getRelationType(); ?>">
+                    <select name="relationType" type="text" class="form-control" id="inputRelationType" required>
+                        <?php
+                            printRelationTypeOptions($relationTypes, $relation->getRelationType());
+                        ?>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">Email</label>
@@ -100,7 +127,7 @@ function printCountryOptions($countryList, $code)
                             Status
                         </label>
                     </div>
-                        <input readonly name="relationNumber" type="hidden" class="form-control" id="inputRelationNumber"
+                        <input readonly name="relationNumber" type="hidden" class="form-control"
                                value="<?php echo $account->getRelationNumber(); ?>">
                     <div class="form-group">
                         <label for="inputUsername">Gebruikersnaam</label>

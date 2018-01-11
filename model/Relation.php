@@ -17,7 +17,7 @@ class Relation
         $this->phoneNumber = $phoneNumber;
     }
 
-    public static function save($relationNumber, $relationType, $isActive, $emailAddress, $phoneNumber)
+    public static function update($relationNumber, $relationType, $isActive, $emailAddress, $phoneNumber)
     {
         $db = DBConnection::getInstance();
         $stmt = $db->prepare('CALL sp_saveRelation(?,?,?,?,?)');
@@ -27,6 +27,17 @@ class Relation
         $stmt->bindParam(4, $emailAddress,   PDO::PARAM_STR);
         $stmt->bindParam(5, $phoneNumber,   PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    public static function getAllRelationTypes(){
+        $relationTypes = [];
+        $db = DBConnection::getInstance();
+        $stmt = $db->query('SELECT * FROM relationType');
+
+        foreach ($stmt->fetchAll() as $type){
+            $relationTypes[] = $type['type'];
+        }
+        return $relationTypes;
     }
 
     public function getRelationNumber()
